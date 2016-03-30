@@ -1,0 +1,38 @@
+<!doctype html>
+<html >
+  <head>
+  	<link rel="stylesheet" type="text/css" href="style.css">
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+     
+    <script src="js/fruitkit.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <!--<script src="js/jsonParserController.js"></script>-->
+    <script src="js/ordersController.js"></script>
+    <script src="js/todayOrdersController.js"></script>
+    <script src="js/singleOrderController.js"></script>
+
+    
+  </head>
+  <body ng-app="fruitkit">
+  	<h2>Fruitkit app</h2>
+  	<nav>
+  		<ul>
+  			<li><a href="#customers">Customers</a> </li>
+  			<li><a href="#orders">Orders</a> </li>
+  			<li><a href="#today">Today</a> </li>
+
+  		</ul>
+  	</nav>
+  	<div >
+  		<!-- ng-controller="jsonParserController" -->
+  		<div ng-view></div> 
+  	</div>
+  </body>
+</html>

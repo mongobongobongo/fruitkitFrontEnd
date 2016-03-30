@@ -1,0 +1,60 @@
+<!-- customers.html -->
+    <div class=" text-center">
+        <h1>Customer list Page</h1>
+
+        <p>{{ message }}</p>
+         <span>{{customerList.remaining()}} of {{customerList.customers.length}} remaining</span>
+
+         <!-- add new customer -->
+         <form ng-submit="customerList.addCustomer()">
+	        <input type="text" ng-model="customerList.defaultName"  size="30" placeholder="add name">
+	        <input type="text" ng-model="customerList.defaultAddress"  size="70" placeholder="add address">
+	        Delivery: <input type="checkbox" ng-model="customerList.defaultDelivery">
+	        Every week: 
+	        every: <input type="checkbox" ng-init="customerList.setEveryWeek() " >	
+	        even: <input type="checkbox" ng-init="customerList.setEvenWeek() " >
+	        odd: <input type="checkbox" ng-init="customerList.setOddWeek() " >		
+	        <input class="btn-primary" type="submit" value="add">
+	      </form>
+
+
+       Search:<input ng-model="query" type="text"/>
+      <ul class="unstyled" ng-repeat="customer in customerList.customers track by customer.id">
+        <li >
+        	<!--<span class=" ">{{customer.id}}</span>-->
+        	<input type="text" ng-model="customer.id" class="form-control">
+        </li>
+        <li><!--<span class=" ">{{customer.name}}</span>-->
+            <input type="text" ng-model="customer.name" class="form-control">
+        </li>
+        <li>
+        	<!--<span class=" ">{{customer.address}}</span>-->
+            <input type="text" ng-model="customer.address" class="form-control">
+        </li>
+        <li>
+        	<!--<span class=" ">{{customer.delivery}}</span>-->
+            isActive: <input type="checkbox" ng-model="customer.isActive" class="form-control">
+        </li>
+        <li>
+        	<!--<span class=" ">{{customer.weeks}}</span>-->
+        	<input type="text" ng-model="customer.weeks">
+        </li>
+        <li>
+        	<!-- <span class=" ">{{customer.days.toString()}}</span>-->
+        	<input type="text" ng-model="customer.days" class="form-control">
+        </li>
+        <li>
+        	 <!--<span class=" ">{{customer.firstDeliveryDate}}</span>-->
+        	 <input type="text" ng-model="customer.firstDeliveryDate" class="form-control">
+        </li>
+            
+            
+            
+        <button class="btn btn-danger" ng-click="customerList.removeCustomer($index)" aria-label="Remove">X</button>
+        <button class="btn" ng-click="customerList.save()" aria-label="Remove">Save</button>
+           
+            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
+         
+      </ul>
+
+    </div>
