@@ -1,0 +1,19 @@
+<!-- singlePackage.html -->
+    <div class="single-package">
+        <h1>One package # {{ packID }}</h1>
+
+        <p>{{ message }}</p>
+        <ul>
+        	<li>name: {{ thisPack.name }}</li>
+        	<li>weight: {{ thisPack.weight }}</li>
+        	<li>fruits: {{ thisPack.fruits}}</li>
+        </ul>
+
+        <h3>Orders with this pack</h3>
+        <ul  ng-repeat="order in ordersWithThisPack">
+            <li>{{order}}</li>
+             
+        </ul>
+
+
+    </div>

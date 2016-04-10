@@ -1,0 +1,32 @@
+<!-- packages.html -->
+    <div class="">
+        <h1>FruitPacks list Page</h1>
+
+        <p>{{ message }}</p>
+         <!-- add new order -->
+         <!--<form ng-submit="orderList.addOrder()">
+	        <input type="text" ng-model="orderList.defaultPack"  size="30" placeholder="add name">
+	        <input type="text" ng-model="orderList.defaultAddress"  size="70" placeholder="add address">
+	        Delivery: <input type="checkbox" ng-model="orderList.defaultDelivery">
+	        Every week: 
+	        every: <input type="checkbox" ng-init="orderList.setEveryWeek() " >	
+	        even: <input type="checkbox" ng-init="orderList.setEvenWeek() " >
+	        odd: <input type="checkbox" ng-init="orderList.setOddWeek() " >		
+	        <input class="btn-primary" type="submit" value="add">
+	     </form>-->
+
+	     <ul class="unstyled" ng-repeat="pack in packageList.packs">
+	        <li>{{pack.packId}}</li>
+	        <li> <input type="text" ng-model="pack.name" class="form-control"></li>
+	        <li> <input type="text" ng-model="pack.weight" class="form-control"></li>
+	        <li><input type="text" ng-model="pack.fruits" class="form-control"></li> 
+	            
+	        <a class="btn" href="#packages/{{ pack.packId }}">Show</a>    
+	        <button class="btn btn-danger" ng-click="orderList.removeOrder($index)" aria-label="Remove">X</button>
+	        <button class="btn" ng-click="orderList.save()" aria-label="Remove">Save</button>
+	           
+	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
+	         
+	      </ul>
+    </div>
+    

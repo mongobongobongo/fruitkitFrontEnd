@@ -9,20 +9,19 @@
          <form ng-submit="customerList.addCustomer()">
 	        <input type="text" ng-model="customerList.defaultName"  size="30" placeholder="add name">
 	        <input type="text" ng-model="customerList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="customerList.defaultDelivery">
+	        Delivery: <input type="checkbox" ng-model="customerList.defaultisActive">
 	        Every week: 
-	        every: <input type="checkbox" ng-init="customerList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-init="customerList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-init="customerList.setOddWeek() " >		
+	        every: <input type="checkbox" ng-click="customerList.setEveryWeek() " >	
+	        even: <input type="checkbox" ng-click="customerList.setEvenWeek() " >
+	        odd: <input type="checkbox" ng-click="customerList.setOddWeek() " >		
 	        <input class="btn-primary" type="submit" value="add">
 	      </form>
 
 
        Search:<input ng-model="query" type="text"/>
-      <ul class="unstyled" ng-repeat="customer in customerList.customers track by customer.id">
+      <ul class="unstyled" ng-repeat="customer in customerList.customers ">
         <li >
-        	<!--<span class=" ">{{customer.id}}</span>-->
-        	<input type="text" ng-model="customer.id" class="form-control">
+        	<span class=" ">{{customer.id}}</span>
         </li>
         <li><!--<span class=" ">{{customer.name}}</span>-->
             <input type="text" ng-model="customer.name" class="form-control">

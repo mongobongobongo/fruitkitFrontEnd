@@ -9,7 +9,7 @@
 				"city": "Helsinki",
 				"isCompany": false},
 			"orderPack": {
-				"packname": "business pack",
+				"packname": "business",
 				 "package-weight": "5kg",
 				 "package-fruits": ["bananas", "apples", "peaches", "oranges"] 
 			},
@@ -28,7 +28,7 @@
 				"city": "Helsinki",
 				"isCompany": false},
 			"orderPack": {
-				"packname": "Home pack",
+				"packname": "private",
 				 "packageWeight": "3kg",
 				 "packageFruits": ["bananas", "apples", "peaches", "oranges"] 
 			},
@@ -38,59 +38,42 @@
 			"firstDeliveryDate": "2015-07-28"
 		},
 		{
-			"orderId": 6,
+			"orderId": 2,
 			"orderCustomer": {
-				"id": 3,
-				"name": "Rita",
+				"id": 2,
+				"name": "Lisa",
 				"address": "SomeAddress 123. 00660",
 				"city": "Helsinki",
 				"isCompany": false},
 			"orderPack": {
-				"packname": "Home pack",
+				"packname": "private",
 				 "packageWeight": "3kg",
 				 "packageFruits": ["bananas", "apples", "peaches", "oranges"] 
 			},
 			"isActive": true,
 			"weeks": "every",
-			"daysInWeek":["Monday"],
+			"daysInWeek":["Monday", "Thursday"],
 			"firstDeliveryDate": "2015-07-28"
 		},
 		{
-			"orderId": 7,
+			"orderId": 2,
 			"orderCustomer": {
-				"id": 6,
-				"name": "Rita",
+				"id": 2,
+				"name": "Lisa",
 				"address": "SomeAddress 123. 00660",
 				"city": "Helsinki",
 				"isCompany": false},
 			"orderPack": {
-				"packname": "Home pack",
+				"packname": "private",
 				 "packageWeight": "3kg",
 				 "packageFruits": ["bananas", "apples", "peaches", "oranges"] 
 			},
 			"isActive": true,
 			"weeks": "every",
-			"daysInWeek":["Monday", "Wednesday"],
-			"firstDeliveryDate": "2015-07-28"
-		},
-		{
-			"orderId": 8,
-			"orderCustomer": {
-				"id": 6,
-				"name": "Rita",
-				"address": "SomeAddress 123. 00660",
-				"city": "Helsinki",
-				"isCompany": false},
-			"orderPack": {
-				"packname": "Home pack",
-				 "packageWeight": "3kg",
-				 "packageFruits": ["bananas", "apples", "peaches", "oranges"] 
-			},
-			"isActive": true,
-			"weeks": "every",
-			"daysInWeek":["Monday", "Wednesday"],
+			"daysInWeek":["Monday", "Thursday"],
 			"firstDeliveryDate": "2015-07-28"
 		}
+
 
 	],
 

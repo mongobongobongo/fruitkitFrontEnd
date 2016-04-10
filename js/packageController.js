@@ -1,41 +1,32 @@
-fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', function($scope, $routeParams, $location, $http, GetJson ) {
-    $scope.message = 'Every order will be displayed here';
-    var orderList = this;
+fruitkitControllers.controller('packageController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', function($scope, $routeParams, $location, $http, GetJson ) {
+    $scope.message = 'Every package will be displayed here';
+    var packageList = this;
     
     GetJson.fetchAllOrders().success(function (response) {
-    	$scope.newOrderList = [];
+    	$scope.newPackageList = [];
         $scope.allData = response;
          	
         console.log("json from factory", response);
-        console.log("json from factory", $scope.allData.orders);
+        console.log("json from factory", $scope.allData.packs);
 
-         //console.log("orders from controller", $scope.ordersJson.orders);
-
-		angular.forEach($scope.allData.orders, function(order) {
+		angular.forEach($scope.allData.packs, function(pack) {
 		        //console.log(order.orderCustomer);
-		    var orderItem = {};
-		    orderItem.orderId = order.orderId;
-		    orderItem.pack = order.orderPack.packname;
-		    orderItem.isActive = order.isActive;
-		    orderItem.weeks = order.weeks;
-		    orderItem.daysInWeek = order.daysInWeek;
-		    orderItem.firstDeliveryDate = order.firstDeliveryDate;
-		    orderItem.customer = order.orderCustomer.name;
-		    orderItem.address = order.orderCustomer.address;
-
-		    $scope.newOrderList.push(orderItem);
-		    console.log(order);
+		    var packItem = {};
+		    packItem.packId = pack.id;
+		    packItem.name =  pack.name;
+		    packItem.weight = pack.weight;
+		    packItem.fruits= pack.fruits;
+		    console.log('the item', packItem);
+		    $scope.newPackageList.push(packItem);
+		    
 
 		});
 
-     	console.log("new order list generated", $scope.newOrderList);
+     	console.log("new package list generated", $scope.newPackageList);
+		packageList.packs = $scope.newPackageList;
 
-		    
-		orderList.orders = $scope.newOrderList;
-
-    	console.log("final orders list", orderList.orders[1].orderId);
     
-		orderList.addOrder = function(){
+		/*packageList.addPackage = function(){
 			var orderId = this.orders.length +1;
 			orderList.orders.push({id: orderId, customer: orderList.defaultCustomer, pack: orderList.defaultPack, address: orderList.defaultAddress, isActive: orderList.defaultisActive, weeks: orderList.defaultWeeks, days: orderList.defaultDays, firstDeliveryDate: orderList.defaultfirstDeliveryDate });
 			orderList.defaultPack = '';
@@ -64,12 +55,12 @@ fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$
 			        weeks: orderList.defaultWeeks,
 			        daysInWeek: orderList.defaultDays,
 			        firstDeliveryDate: orderList.defaultfirstDeliveryDate
-			      });*/
-		};
+			      });
+		};*/
 
-	    orderList.removeOrder = function(index) {
+	    /*orderList.removeOrder = function(index) {
 	       orderList.orders.splice(index, 1);
-	    };
+	    };*/
      });
 
 }]);
