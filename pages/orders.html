@@ -2,36 +2,115 @@
     <div class="">
         <h1>Order list Page</h1>
 
-        <p>{{ message }}</p>
          <!-- add new order -->
-         <form ng-submit="orderList.addOrder()">
-	        <input type="text" ng-model="orderList.defaultPack"  size="30" placeholder="add name">
-	        <input type="text" ng-model="orderList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="orderList.defaultDelivery">
-	        Every week: 
-	        every: <input type="checkbox" ng-init="orderList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-init="orderList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-init="orderList.setOddWeek() " >		
-	        <input class="btn-primary" type="submit" value="add">
-	     </form>
+         <div>
+            <button ng-click="toggle()">Add order</button>
+         </div>
+         <div ng-show="showForm">
+	         <form ng-submit="addOrder()">
+                <div>
+                    <p>What fruitpack do you deliver?</p>
+                    <select ng-options="pack.name for pack in packs" ng-model="orderPack"></select> 
+                </div>
+                <div>
+                    <p>Customer: </p> 
+                    <select ng-options="customer.name for customer in customers" ng-model="orderCustomer"></select>
+                </div>
+                <div>
+                    <p>What is the address that you deliver to?</p>
+                    <input type="text" ng-model="orderAddress"  size="70" placeholder="add address">
+                </div>
+		        <div>
+                    <p>Is it active by default?</p>
+                    <input type="checkbox" ng-click="isActive()" ng-checked="activeCheck"><span>active</span>
+                    <input type="checkbox" ng-click="isNotActive()" ng-checked="nonactiveCheck"><span>not active</span>
+                </div>
+                <div>
+                    <p>Select weeks:</p>
+                    <input type="checkbox" ng-click="selectWeek('every')" ng-checked="everyCheck"> <span>every</span> 
+                    <input type="checkbox" ng-click="selectWeek('even')" ng-checked="evenCheck"> <span>even</span> 
+                    <input type="checkbox" ng-click="selectWeek('odd')" ng-checked="oddCheck"> <span>odd</span>
+                </div>
+                <div>
+                    <p>Select days:</p>
+                    <input type="checkbox" ng-click="addDay('Monday')" ng-checked="dayChecked"> <span>Monday</span>
+                    <input type="checkbox" ng-click="addDay('Tuesday')"  ng-checked="dayChecked"> <span>Tuesday</span>
+                    <input type="checkbox" ng-click="addDay('Wednesday')"  ng-checked="dayChecked"> <span>Wednesday</span>
+                    <input type="checkbox" ng-click="addDay('Thursday')"  ng-checked="dayChecked"> <span>Thursday</span>
+                    <input type="checkbox" ng-click="addDay('Friday')"  ng-checked="dayChecked"> <span>Friday</span>
+                    <input type="checkbox" ng-click="addDay('Saturday')"  ng-checked="dayChecked"> <span>Saturday</span>
+                    <input type="checkbox" ng-click="addDay('Sunday')" ng-checked="dayChecked"> <span>Sunday</span>
+                </div>
+                <div>
+                    <p>Delivery details</p>
+                    <input type="text" size="200" ng-model="details">
+                </div>
+                <div>
+                    <p>Delivery phone</p>
+                    <input type="text" size="200" ng-model="telephone">
+                </div>
+                <div>
+                    <p>Pick first delivery date: </p>
+                    <input type="date" ng-model="orderFirstsDeliveryDate" size="30" placeholder="add date"> 
+                </div>
+		        	
+		        <input class="button-add" type="submit" value="add">
+		     </form>
+         </div>
+         <div>
+              <hr/>
+                <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort" ng-change="sortBy(driverToSort)"></select>
+                {{ driverToSort.firstName }}
+              <table class="friends">
+                <tr ng-repeat="order in driversList">
+                    <td>{{$index + 1}}</td>
+                    <td>{{ order.pack.name }}</td> 
+                    <td>{{ order.customer.companyName || order.customer.name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.isActive }}</td>
+                    <td>{{ order.weeks }}</td>
+                    <td>{{ order.days.toString() }}</td>
+                    <td>{{ order.orderDriver }}</td>
+                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
+                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+                    <td><button class="btn" ng-click="markAsCompleted(order._id, $index)">Mark as completed</button></td>
+                </tr>
+              </table>
+              <hr/>
+        </div>
+         
 
-	     <ul class="unstyled" ng-repeat="order in orderList.orders">
-	        <li>{{ order.orderId }}</li>
-	        <li> <input type="text" ng-model="order.pack" class="form-control"></li>
-	        <li> <input type="text" ng-model="order.customer" class="form-control"></li>
-	        <li><input type="text" ng-model="order.address" class="form-control"></li>
-	        <li>isActive: <input type="checkbox" ng-model="order.isActive" class="form-control"></li>
-	        <li><input type="text" ng-model="order.weeks"></li>
-	        <li><input type="text" ng-model="order.days" class="form-control"></li>
-	        <li><input type="text" ng-model="order.firstDeliveryDate" class="form-control"></li>
-	        <li>Order # {{ order.id }}</li>    
-	            
-	        <a class="btn" href="#orders/{{ order.orderId }}">Show</a>    
-	        <button class="btn btn-danger" ng-click="orderList.removeOrder($index)" aria-label="Remove">X</button>
-	        <button class="btn" ng-click="orderList.save()" aria-label="Remove">Save</button>
-	           
-	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
-	         
-	      </ul>
+         <div>
+            <table>
+            <thead>
+              <tr>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Customer</th>
+                 <th>Address</th>
+                 <th>Active</th>
+                 <th>Weeks</th>
+                 <th>Days</th>
+                 <th>Driver</th>
+                 <th></th>
+                 <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="order in orders | orderBy:'-orderDriver'">
+                    <td>{{$index + 1}}</td>
+                    <td>{{ order.pack.name }}</td> 
+                    <td>{{ order.customer.companyName || order.customer.name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.isActive }}</td>
+                    <td>{{ order.weeks }}</td>
+                    <td>{{ order.days.toString() }}</td>
+                    <td>{{ order.orderDriver }}</td>
+                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
+                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+                </tr>
+            </tbody>      
+        </table>
+         </div>
     </div>
     

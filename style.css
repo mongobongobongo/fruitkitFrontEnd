@@ -1,7 +1,53 @@
-ul li{
-	display: inline-block;
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+	font-family: 'Open Sans', sans-serif;
 }
 
-.single-order ul li{
+nav{
+	font-size: 16px;
+	color: blue;
 	display: block;
+	width: 50%;
+	margin: 10px auto;
+}
+
+nav ul li{
+	display: inline-block;
+	margin-right: 20px;	
+	padding: 10px;
+	border: 1px solid ghostwhite;
+}
+
+nav ul li a{
+	text-decoration: none;
+}
+
+ul li{
+	display: block;
+}
+
+h1, h2{
+	text-align: center;
+}
+
+table th, td{
+	width: 180px;
+	text-align: left;
+}
+
+.mainPageList{
+	display: inline-block;
+	width: 25%;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	list-style-type: none;
+	background-color: green;
+	height: auto;
+}
+
+.titleForCompany{
+	background-color: pink;
+	display: block;
+	border: 1px solid black;
 }

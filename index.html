@@ -13,21 +13,29 @@
     <script src="js/fruitkit.js"></script>
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/mainController.js"></script>
     <script src="js/customersController.js"></script>
     <script src="js/ordersController.js"></script>
-    <script src="js/todayOrdersController.js"></script>
+    <script src="js/todayController.js"></script>
+    <script src="js/weekController.js"></script>
     <script src="js/singleOrderController.js"></script>
     <script src="js/packageController.js"></script>
+    <script src="js/employeesController.js"></script>
     <script src="js/singlePackageController.js"></script>
+    <script type="text/javascript">
+    console.log(window.location.hash);
+       
+    </script>
 
     
   </head>
   <body>
-  	<h1>Fruitkit app</h1>
+  	<h1>Fruitkit</h1>
   	<nav>
   		<ul>
-  			<li><a href="#customers">Customers</a> </li>
-  			<li><a href="#orders">Orders</a> </li>
+  			<li id="customers"><a href="#customers">Customers</a> </li>
+        <li id="employees"><a href="#employees">Employees</a> </li>
+  			<li id="orders"><a href="#orders">Orders</a> </li>
         <li><a href="#packages">Fruit Packs</a> </li>
   			<li><a href="#today">Today</a> </li>
 

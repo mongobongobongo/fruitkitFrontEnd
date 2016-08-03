@@ -52,7 +52,7 @@
 			},
 			"isActive": true,
 			"weeks": "every",
-			"daysInWeek":["Monday", "Thursday"],
+			"daysInWeek":["Monday", "Thursday", "Wednesday"],
 			"firstDeliveryDate": "2015-07-28"
 		},
 		{
@@ -70,7 +70,25 @@
 			},
 			"isActive": true,
 			"weeks": "every",
-			"daysInWeek":["Monday", "Thursday"],
+			"daysInWeek":["Monday", "Thursday", "Wednesday"],
+			"firstDeliveryDate": "2015-07-28"
+		},
+		{
+			"orderId": 3,
+			"orderCustomer": {
+				"id": 2,
+				"name": "Lisa",
+				"address": "SomeAddress 123. 00660",
+				"city": "Helsinki",
+				"isCompany": false},
+			"orderPack": {
+				"packname": "private",
+				 "packageWeight": "3kg",
+				 "packageFruits": ["bananas", "apples", "peaches", "oranges"] 
+			},
+			"isActive": true,
+			"weeks": "every",
+			"daysInWeek":["Monday", "Thursday", "Wednesday"],
 			"firstDeliveryDate": "2015-07-28"
 		}
 

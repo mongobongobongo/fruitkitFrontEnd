@@ -1,7 +1,31 @@
-fruitkitControllers.controller('singlePackageController', ['$scope', '$routeParams','$location', '$http', 'GetJson', function($scope, $routeParams, $location, $http, GetJson) {
+fruitkitControllers.controller('singlePackageController', ['$scope', '$routeParams','$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer) {
 $scope.message = 'This is one package here';
       //push orders into array as we receive the json 
-    GetJson.fetchAllOrders().success(function (response) {
+      $scope.thisPack = "";
+    connectToKallesServer.getPackages(function (data) {
+      $scope.packs = data;
+      console.log("real packages", $scope.packs );
+      $scope.packID = $routeParams.packageId;
+        
+       
+        
+       angular.forEach(data, function(pack) {
+             if(pack._id == $routeParams.packageId){
+              $scope.thisPack = pack;
+              console.log("this order", $scope.thisPack);
+             }
+        }); 
+    });
+
+    connectToKallesServer.getOrders(function (data) {
+        
+       angular.forEach(data, function(order) {
+             if($scope.thisPack.name == order.pack){
+                $scope.ordersWithThisPack.push(order);
+             }
+        }); 
+    });
+   /* GetJson.fetchAllOrders().success(function (response) {
         $scope.allData = response;
         $scope.ordersWithThisPack = [];
         console.log(response);
@@ -26,5 +50,5 @@ $scope.message = 'This is one package here';
         }); 
        console.log($scope.ordersWithThisPack);
        
-     });
+     });*/
 }]);

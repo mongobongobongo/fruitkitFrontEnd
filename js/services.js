@@ -36,7 +36,7 @@ fruitkitServices.service('weekdayToNumber', function(){
 	};
 });*/
 
-fruitkitServices.service('createOrderItem', function(){
+/*fruitkitServices.service('createOrderItem', function(){
 	this.createOrderItem = function(order){
   		var orderItem = {};
 		orderItem.orderId = order.orderId;
@@ -49,4 +49,139 @@ fruitkitServices.service('createOrderItem', function(){
 		orderItem.address = order.orderCustomer.address;
 		//$scope.newOrderList.push(orderItem);
   	};
-});
+});*/
+
+fruitkitServices.service('connectToKallesServer', ['$http', function($http){
+	this.getCustomers = function(callback){
+		$http
+		.get('http://brometheus.org:3000/customers')
+		.success(function(data){
+			console.log(data);                        
+			callback(data);
+
+        });
+	};
+	this.postCustomers = function(obj){
+		var dataToPost = angular.toJson(obj);//JSON.stringify(obj); 
+		$http
+		.post('http://brometheus.org:3000/customers', dataToPost)
+        .success(function(){
+            console.log("data put successfully");
+        });
+        return obj;
+	};
+	
+	this.deleteCustomers = function(id){
+
+			$http
+			.delete('http://brometheus.org:3000/customers/' + id)
+            .success(function(){
+                console.log("deleted successfully");
+            });
+	};
+
+	this.getOrder = function(callback, id){
+		$http
+		.get('http://brometheus.org:3000/orders/' + id)
+		.success(function(data){
+			console.log(data);                        
+			callback(data);
+
+        });
+	};
+
+	this.putOrder = function(payload, id){
+		$http
+		.put('http://brometheus.org:3000/orders/' + id, JSON.stringify(payload))
+		.success(function(data){
+			console.log(data);                        
+        });
+	};
+
+	this.getOrders = function(callback){
+		$http
+		.get('http://brometheus.org:3000/orders')
+		.success(function(data){
+			console.log(data);                        
+			callback(data);
+
+        });
+	};
+
+	this.postOrders = function(obj){
+		var dataToPost = angular.toJson(obj);//JSON.stringify(obj); 
+		$http
+		.post('http://brometheus.org:3000/orders', dataToPost)
+        .success(function(){
+            console.log("data put successfully");
+        });
+        return obj;
+	};
+
+	this.deleteOrder = function(id){
+
+			$http
+			.delete('http://brometheus.org:3000/orders/' + id)
+            .success(function(){
+                console.log("deleted successfully");
+            });
+	};
+
+	this.getPackages = function(callback){
+		$http
+		.get('http://brometheus.org:3000/packages')
+		.success(function(data){
+			console.log(data);                        
+			callback(data);
+
+        });
+	};
+
+	this.postPackages = function(obj){
+		var dataToPost = angular.toJson(obj);//JSON.stringify(obj); 
+		$http
+		.post('http://brometheus.org:3000/packages', dataToPost)
+        .success(function(){
+            console.log("data put successfully");
+        });
+        return obj;
+	};
+
+	this.deletePackage = function(id){
+
+			$http
+			.delete('http://brometheus.org:3000/packages/' + id)
+            .success(function(){
+                console.log("deleted successfully");
+            });
+	};
+
+	this.getEmployees = function(callback){
+		$http
+		.get('http://brometheus.org:3000/employees')
+		.success(function(data){
+			console.log(data);                        
+			callback(data);
+
+        });
+	};
+
+	this.postEmployees = function(obj){
+		var dataToPost = angular.toJson(obj);//JSON.stringify(obj); 
+		$http
+		.post('http://brometheus.org:3000/employees', dataToPost)
+        .success(function(){
+            console.log("data put successfully");
+        });
+        return obj;
+	};
+
+	this.deleteEmployees = function(id){
+
+			$http
+			.delete('http://brometheus.org:3000/employees/' + id)
+            .success(function(){
+                console.log("deleted successfully");
+            });
+	};
+}]);

@@ -1,29 +1,37 @@
 <!-- packages.html -->
     <div class="">
-        <h1>FruitPacks list Page</h1>
+        <h2>FruitPacks list Page</h2>
 
-        <p>{{ message }}</p>
+        
          <!-- add new order -->
-         <!--<form ng-submit="orderList.addOrder()">
-	        <input type="text" ng-model="orderList.defaultPack"  size="30" placeholder="add name">
-	        <input type="text" ng-model="orderList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="orderList.defaultDelivery">
-	        Every week: 
-	        every: <input type="checkbox" ng-init="orderList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-init="orderList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-init="orderList.setOddWeek() " >		
-	        <input class="btn-primary" type="submit" value="add">
-	     </form>-->
+         <div>
+            <button ng-click="toggle()">Add package</button>
+         </div>
+         <div ng-show="showForm">
+         	<form ng-submit="addPackage()">
+         		<span>Fruitpack name:</span>
+		        <input type="text" ng-model="packName "  size="30" placeholder="name">
+		        <span>Weight, kg</span>
+		        <input type="text" ng-model="packWeight"  size="70" placeholder="weight, like 5 kg">
+		        <span>Fruits:</span>
+		        <input type="text" ng-model="packFruits"  size="70" placeholder="like ananas, lemons, oranges">
+		        
+		        <input class="button-add" type="submit" value="add">
+		     </form>
+         </div>
 
-	     <ul class="unstyled" ng-repeat="pack in packageList.packs">
-	        <li>{{pack.packId}}</li>
-	        <li> <input type="text" ng-model="pack.name" class="form-control"></li>
-	        <li> <input type="text" ng-model="pack.weight" class="form-control"></li>
-	        <li><input type="text" ng-model="pack.fruits" class="form-control"></li> 
+	     <ul class="list" >
+	     	<li ng-repeat="pack in packs">
+	     		<span>{{$index + 1}}</span>
+	     		<span>{{ pack.name }}</span>
+	     		<span>{{ pack.weight }}</span>
+	     		<span>{{ pack.fruits }}</span>
+	     		
+	     		<button class="btn"><a href="#packages/{{ pack._id }}">More</a></button> 
+	        	<button class="btn btn-danger" ng-click="removePackage(pack._id)" aria-label="Remove">X</button>
+	     	</li>
 	            
-	        <a class="btn" href="#packages/{{ pack.packId }}">Show</a>    
-	        <button class="btn btn-danger" ng-click="orderList.removeOrder($index)" aria-label="Remove">X</button>
-	        <button class="btn" ng-click="orderList.save()" aria-label="Remove">Save</button>
+	        
 	           
 	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
 	         

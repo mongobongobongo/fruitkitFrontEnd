@@ -1,136 +1,61 @@
 // create the controller and inject Angular's $scope
-fruitkitControllers.controller('customersController', ['$scope', '$location', '$http', '$rootScope', 'GetJson', function($scope, $location, $http, $rootScope, GetJson)  {
-/*scope.ordersJson = {};
-    $http.get('json/allOrders.json').success(function(data) {
-          $scope.ordersJson = data;
-          console.log("success");
-    });*/
-    var customerList = this;
-    $scope.allData =[]; 
+fruitkitControllers.controller('customersController', ['$scope', '$location', '$http', '$rootScope', 'GetJson', 'connectToKallesServer', function($scope, $location, $http, $rootScope, GetJson, connectToKallesServer)  {
+    $scope.customers = [];
 
-    GetJson.fetchAllOrders().success(function (response) {
-      console.log(response);
-        $scope.allData = response;
-        console.log("json from factory", response);
-        console.log("json from factory", $scope.allData );
-        //returns the array of orders
-        // create a message to display in our view
+    connectToKallesServer.getCustomers(function (data) {
+      $scope.customers = data;
+      console.log("real customers", $scope.customers );
+    });
 
- 
-          $scope.message = 'Customers are going to be in this list';
-          $scope.editIsActive = false;
-          $scope.customerId = null;
-          $scope.orderList = $scope.allData.orders; //$scope.ordersJson.orders;
-          $scope.newCustomerList = [];
+    $scope.customerName = "";
+    $scope.customerSurname = "";
+    $scope.customerCity = "";
+    $scope.customerPostcode = "";
+    $scope.customerStreet = "";
+    $scope.customerEmail = "";
+    $scope.customerPhone = "";
+    
+    $scope.companyName = "";
+    $scope.setIsCompany = function(){
+      $scope.isCompany = true;
+    };
 
-          //console.log("orders json", $scope.orderList);
+    $scope.addCustomer = function(){
+      $scope.customer = {};
+      $scope.customer.name = $scope.customerName || "no name";
+      $scope.customer.surname = $scope.customerSurname|| "no surname";
+      $scope.customer.isCompany = $scope.isCompany ||  false;
+      $scope.customer.companyName = $scope.companyName  || "no name";
+      $scope.customer.city = $scope.customerCity || "no city";
+      $scope.customer.postcode = $scope.customerPostcode  || "no postcode";
+      $scope.customer.street = $scope.customerStreet || "no street address";
+      $scope.customer.email = $scope.customerEmail ||  "no email";
+      $scope.customer.phone = $scope.customerPhone ||  "no phone";
 
-          angular.forEach($scope.allData.orders, function(order) {
-                  console.log(order.orderCustomer);
-                  order.orderCustomer.isActive = order.isActive;
-                  order.orderCustomer.weeks = order.weeks;
-                  order.orderCustomer.daysInWeek = order.daysInWeek;
-                  order.orderCustomer.pack = order.orderPack.packname;
-                  order.orderCustomer.firstDeliveryDate = order.firstDeliveryDate;
+      $scope.customers.push($scope.customer);
+      connectToKallesServer.postCustomers( $scope.customer);
+      $scope.showForm = !$scope.showForm;
 
-                  $scope.newCustomerList.push(order.orderCustomer);
+    };
 
-          });
-
-          console.log("customer list", $scope.newCustomerList );
-   
-          customerList.customers = $scope.newCustomerList;
-       
-          customerList.addCustomer = function() {
-            var customerId = this.customers.length +1;
-            customerList.customers.push({id: customerId, name: customerList.defaultName, address: customerList.defaultAddress, isActive: customerList.defaultisActive, weeks:  customerList.defaultWeeks, days:  customerList.defaultDays, firstDeliveryDate: customerList.defaultfirstDeliveryDate });
-            customerList.defaultName = '';
-            customerList.defaultAddress = 'no address';
-            customerList.defaultisActive = true;
-            customerList.defaultWeeks = 'every';
-            customerList.defaultDays = []; 
-            customerList.defaultfirstDeliveryDate = 'no date';
-
-           $scope.orderList.push({
-              orderId: $scope.orderList.length + 1,
-              orderCustomer: {
-                id: customerId,
-                name: customerList.defaultName,
-                address: customerList.defaultAddress,
-                city: "Helsinki",
-                isCompany: false},
-              orderPack: {
-                packname: "business pack",
-                packageWeight: "5kg",
-                packageFruits: ["bananas", "apples", "peaches", "oranges"] 
-              },
-              
-              isActive: customerList.defaultisActive,
-              weeks: customerList.defaultWeeks,
-              daysInWeek: customerList.defaultDays,
-              firstDeliveryDate: customerList.defaultfirstDeliveryDate
-            });
-
-          };
+    $scope.removeCustomer = function(id, index){
+      console.log("deleted", id);
+      connectToKallesServer.deleteCustomers(id);
+      $scope.customers.splice(index, 1);
+     };
 
 
-          customerList.activateEdit = function() {
-             $scope.editIsActive = true;
-             $scope.customerId = null;
-             console.log("activate edit mode is " + $scope.editIsActive );
-             console.log($scope.customerId);
-          };
-
-          customerList.removeCustomer = function(index) {
-             customerList.customers.splice(index, 1);
-          };
-
-          customerList.save = function() {
-          //TODO: implement json saving function
-
-          /*$http.post("allOrders.json", JSON.stringify($scope.orderList)).then(function(data) {
-            $scope.msg = 'Data saved';
-          });*/
-          //$scope.msg = 'Data sent: '+ JSON.stringify($scope.languages);
-
-          /*$http({
-              url: '/json',
-              method: "POST",
-              data: JSON.stringify($scope.orderList),
-              headers: {'Content-Type': undefined}
-          }).success(function (data, status, headers, config) {
-              //$scope.users = data.users; // assign  $scope.persons here as promise is resolved here 
-              console.log("bananaaaaaaaaaa!");
-          }).error(function (data, status, headers, config) {
-              //$scope.status = status + ' ' + headers;
-              console.log("hui");
-          });*/
-
-      };
-
-        customerList.setEveryWeek = function(){
-          customerList.defaultWeeks = 'every';
-           
-            console.log(customerList.defaultWeeks);
-          };
-          customerList.setEvenWeek = function(){
-            customerList.defaultWeeks = 'even';
-            console.log(customerList.defaultWeeks);
-          };
-          customerList.setOddWeek = function(){
-            customerList.defaultWeeks = 'odd';
-            console.log(customerList.defaultWeeks);
-          }
- 
-          customerList.remaining = function() {
-            var count = 0;
-            angular.forEach(customerList.customers, function(customer) {
-              count += customer.isActive ? 0 : 1;
-            });
-            return count;
-          };
-     });
-
-
-   
+     $scope.toggle = function(){
+        $scope.showForm = !$scope.showForm;
+        $scope.customerName = "";
+        $scope.customerSurname = "";
+        $scope.customerCity = "";
+        $scope.customerPostcode = "";
+        $scope.customerStreet = "";
+        $scope.customerEmail = "";
+        $scope.customerPhone = "";
+    
+        $scope.companyName = "";
+     };
+            
 }]);

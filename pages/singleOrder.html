@@ -3,14 +3,33 @@
         <h1>One order # {{ orderID }}</h1>
 
         <p>{{ message }}</p>
+
+        <div>
+            <button ng-click="toggle()">Add order</button>
+         </div>
+         <div ng-show="showForm">
+                <div>
+                    <p>What fruitpack do you deliver?</p>
+                    <select ng-options="pack.name for pack in packs" ng-model="thisOrder.pack" ng-change="changedOrderPack(thisOrder.pack, thisOrder._id)" ></select> 
+                </div>
+                <div>
+                    <p>Customer: </p> 
+                    <select ng-options="customer.name for customer in customers" ng-model="thisOrder.customer" ng-change="changedOrderCustomer(thisOrder.customer, thisOrder._id)"></select>
+                </div>
+                <div>
+                    <p>What is the address that you deliver to?</p>
+                    <input type="text" ng-model="thisOrder.address"  size="70" placeholder="add address" ng-change="changedOrderAddress(thisOrder.address, order._id, $index)">
+                </div>
+         </div>
+         
         <ul>
-        	<li>customer: {{ thisOrder.orderCustomer }}</li>
-        	<li>pack: {{ thisOrder.orderPack }}</li>
-        	<li>days: {{ thisOrder.daysInWeek }}</li>
-        	<li>weeks: {{ thisOrder.weeks }}</li>
-        	<li>first delivery: {{ thisOrder.firstDeliveryDate }}</li>
+        	<li><b>whole order: {{ thisOrder }}</b></li>
+        	<li>customer: {{ thisOrder.customer.name || thisOrder.customer.firstName}}</li>
+        	<li>days: {{ thisOrder.days}}</li>
+        	<li>address: {{ thisOrder.address }}</li>
+        	<li>driver: {{ thisOrder.orderDriver }}</li>
         	<li>is Active: {{ thisOrder.isActive }}</li>
+        	<li>orderStatus: {{ thisOrder.orderStatus}}</li>
+        	<li>pack: {{ thisOrder.pack.name}}</li>
         </ul>
-
-
     </div>

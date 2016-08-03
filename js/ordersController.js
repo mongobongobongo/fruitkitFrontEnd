@@ -1,75 +1,132 @@
-fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', function($scope, $routeParams, $location, $http, GetJson ) {
-    $scope.message = 'Every order will be displayed here';
-    var orderList = this;
-    
-    GetJson.fetchAllOrders().success(function (response) {
-    	$scope.newOrderList = [];
-        $scope.allData = response;
-         	
-        console.log("json from factory", response);
-        console.log("json from factory", $scope.allData.orders);
+fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+  $scope.message = 'Every order will be displayed here';
+  $scope.orders = [];
+  $scope.driverToSort = [];
+  $scope.driversList  = [];
 
-         //console.log("orders from controller", $scope.ordersJson.orders);
+  connectToKallesServer.getOrders(function (data) {
+    $scope.orders = data;
+  });
 
-		angular.forEach($scope.allData.orders, function(order) {
-		        //console.log(order.orderCustomer);
-		    var orderItem = {};
-		    orderItem.orderId = order.orderId;
-		    orderItem.pack = order.orderPack.packname;
-		    orderItem.isActive = order.isActive;
-		    orderItem.weeks = order.weeks;
-		    orderItem.daysInWeek = order.daysInWeek;
-		    orderItem.firstDeliveryDate = order.firstDeliveryDate;
-		    orderItem.customer = order.orderCustomer.name;
-		    orderItem.address = order.orderCustomer.address;
+  connectToKallesServer.getPackages(function (data) {
+    $scope.packs = data;
+  });
 
-		    $scope.newOrderList.push(orderItem);
-		    console.log(order);
+  connectToKallesServer.getCustomers(function (data) {
+    $scope.customers = data;
+  });
 
-		});
+  connectToKallesServer.getEmployees(function(data){
+     $scope.employees = data;
+  });
 
-     	console.log("new order list generated", $scope.newOrderList);
+  $scope.orderCustomer = "";
+  $scope.orderAddress = "";
+  //$scope.orderPack = $scope.selectedPack || "no pack";
+  $scope.orderPack = "";
+  $scope.orderDays = [];
+  $scope.orderFirstsDeliveryDate = "";
+  $scope.orderStatus = "";
+  $scope.orderDriver = "";
+  $scope.orderIsActive = "";
+  $scope.details = "";
+  $scope.telephone = " ";
 
-		    
-		orderList.orders = $scope.newOrderList;
 
-    	console.log("final orders list", orderList.orders[1].orderId);
-    
-		orderList.addOrder = function(){
-			var orderId = this.orders.length +1;
-			orderList.orders.push({id: orderId, customer: orderList.defaultCustomer, pack: orderList.defaultPack, address: orderList.defaultAddress, isActive: orderList.defaultisActive, weeks: orderList.defaultWeeks, days: orderList.defaultDays, firstDeliveryDate: orderList.defaultfirstDeliveryDate });
-			orderList.defaultPack = '';
-			orderList.defaultAddress = 'no address';
-			orderList.defaultisActive = false;
-			orderList.defaultWeeks = 'every';
-			orderList.defaultDays = []; 
-			orderList.defaultfirstDeliveryDate = 'no date';
-			orderList.defaultCustomer = 'no customer';
+  function resetAddForm(){
+    $scope.orderCustomer = "";
+    $scope.orderAddress = "";
+    $scope.orderPack = "no pack";
+    $scope.orderDays = [];
+    $scope.orderFirstsDeliveryDate = "";
+    $scope.orderStatus = "";
+    $scope.orderDriver = "";
+    $scope.orderIsActive = false;
+    $scope.orderWeeks = "";
+    $scope.everyCheck = false;
+    $scope.evenCheck = false;
+    $scope.oddCheck = false;
+    $scope.activeCheck = false;
+    $scope.nonactiveCheck = false;
+    $scope.dayChecked = false;
+  }
 
-				/*$scope.orderList.push({
-			        orderId: orderId,
-			        orderCustomer: {
-			          id: 2,
-			          name: orderList.defaultCustomer,
-			          address: orderList.defaultAddress,
-			          city: "Helsinki",
-			          isCompany: false},
-			        orderPack: {
-			          packname: orderList.defaultPack,
-			          packageWeight: "5kg",
-			          packageFruits: ["bananas", "apples", "peaches", "oranges"] 
-			        },
-			        
-			        isActive: orderList.defaultisActive,
-			        weeks: orderList.defaultWeeks,
-			        daysInWeek: orderList.defaultDays,
-			        firstDeliveryDate: orderList.defaultfirstDeliveryDate
-			      });*/
-		};
+  $scope.toggle = function(){
+    $scope.showForm = !$scope.showForm;
+  };
 
-	    orderList.removeOrder = function(index) {
-	       orderList.orders.splice(index, 1);
-	    };
-     });
+	$scope.isActive = function(){
+		$scope.orderIsActive = true;
+    $scope.activeCheck = true;
+    $scope.nonactiveCheck = false;
+	};
+
+  $scope.isNotActive = function(){
+    $scope.orderIsActive = false;
+    $scope.activeCheck = false;
+    $scope.nonactiveCheck = true;
+  };
+
+	$scope.selectWeek = function(week){
+		if(week == "even"){
+			$scope.orderWeeks = "even";
+      $scope.everyCheck = true;
+      $scope.evenCheck = false;
+      $scope.oddCheck = false;
+		} else if(week == "every"){
+			$scope.orderWeeks = "every";
+      $scope.everyCheck = false;
+      $scope.evenCheck = true;
+      $scope.oddCheck = false;
+		} else{
+			$scope.orderWeeks = "odd";
+      $scope.everyCheck = false;
+      $scope.evenCheck = false;
+      $scope.oddCheck = true;
+		}
+	};
+
+	$scope.addDay = function(day){
+		$scope.orderDays.push(day);
+	};
+	 
+  $scope.addOrder = function(){
+    $scope.order = {};
+    $scope.order.address = $scope.orderAddress  || "no address";
+    $scope.order.pack = $scope.orderPack  || "no pack";
+    $scope.order.isActive = $scope.orderIsActive || false;
+    $scope.order.weeks = $scope.orderWeeks ||  "no weeks";
+    $scope.order.days = $scope.orderDays ||  "no days";
+    $scope.order.firstDelivery = $scope.orderFirstsDeliveryDate  ||  "no first delivery";
+    $scope.order.customer = $scope.orderCustomer  ||  "no customer";
+    $scope.order.orderDriver = $scope.orderDriver || "no driver";
+    $scope.order.orderStatus = $scope.orderStatus || "not packed";
+    $scope.order.statusList = ["not packed", "packed", "to be picked", "picked", "delivered" ];
+    $scope.order.details = $scope.details || " ";
+    $scope.order.telephone = $scope.telephone || " ";
+    $scope.orders.push($scope.order);
+    connectToKallesServer.postOrders( $scope.order);
+    $scope.showForm = !$scope.showForm;
+    resetAddForm();
+  };
+
+  $scope.removeOrder = function(id, index){
+    console.log("deleted", id); 
+    connectToKallesServer.deleteOrder(id);
+    $scope.orders.splice(index, 1);
+  };
+
+  $scope.sortBy = function(driverToSort){
+
+    angular.forEach($scope.orders, function(order){
+            //$scope.order =  order;
+            if(order.orderDriver === driverToSort.firstName){
+                 $scope.driversList.push(order);
+            }
+
+           
+        });
+  }
+     
 
 }]);

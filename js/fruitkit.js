@@ -5,30 +5,43 @@ fruitkit.config(['$routeProvider', '$locationProvider',
 	function($routeProvider) {
         $routeProvider
         //route for the customers page
+            .when('/', {
+                templateUrl : '../pages/main.html',
+                //now we do not have to specify the ng-controller in the directive
+                controller  : 'mainController'//,
+                //controllerAs: 'customerList'
+            })
+
             .when('/customers', {
                 templateUrl : '../pages/customers.html',
                 //now we do not have to specify the ng-controller in the directive
-                controller  : 'customersController',
-                controllerAs: 'customerList'
+                controller  : 'customersController'//,
+                //controllerAs: 'customerList'
             })
 
             //route for the orders page
             .when('/orders', {
                 templateUrl : '../pages/orders.html',
-                controller  : 'ordersController',
-                controllerAs: 'orderList'
+                controller  : 'ordersController'//,
+                //controllerAs: 'orderList'
             })
             .when('/employees', {
                 templateUrl : '../pages/employees.html',
-                controller  : 'employeesController',
-                controllerAs: 'employeesList'
+                controller  : 'employeesController'
+                //controllerAs: 'employeesList'
             })
 
             // route for the today page
             .when('/today', {
                 templateUrl : '../pages/today.html',
-                controller  : 'todayController',
-                controllerAs: 'orderList'
+                controller  : 'todayController'
+            })
+
+
+            // route for the today page
+            .when('/week', {
+                templateUrl : '../pages/week.html',
+                controller  : 'weekController'
             })
 
             .when('/orders/:orderId', {

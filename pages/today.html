@@ -1,36 +1,72 @@
-<!-- today.html -->
+	<!-- today.html -->
     <div class="text-center">
-        <h1>Today</h1>
+        <h2>Today</h2>
 
-        <p>{{ message }}</p>
-                  <!-- add new order -->
-         <form ng-submit="orderList.addOrder()">
-	        <input type="text" ng-model="orderList.defaultPack"  size="30" placeholder="add name">
-	        <input type="text" ng-model="orderList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="orderList.defaultDelivery">
-	        Every week: 
-	        every: <input type="checkbox" ng-init="orderList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-init="orderList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-init="orderList.setOddWeek() " >		
-	        <input class="btn-primary" type="submit" value="add">
-	     </form>
+        <!-- add new order -->
+	  	<!--<ul class="list" >
+	        <li ng-repeat="order in newOrderList">
+	        	<span>{{$index + 1}}</span>
+	        	<span>{{ order.pack.name }}</span>
+	        	<span>{{ order.customer.name }}</span>
+	        	<span>{{ order.weeks }}</span>
+	        	<span>{{ order.days.toString() }}</span>
+	        	<span>{{ order.status }}</span>
+	        	<select ng-options="status for status in order.statusList" ng-model="order.status" ng-change="changedValue(order.status, order._id, $index)" ></select>
+	        	{{order.driver}}
+	        	<select ng-options="employee.name for employee in employees" ng-model="order.driver" ng-change="changedDriver(order.driver, order._id, $index)"></select>	
+	        	
+	        </li>
+	    </ul>-->
+	    <div>
+              <hr/>
+                <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort" ng-change="sortBy(driverToSort)"></select>
+                {{ driverToSort.firstName }}
+              <table class="friends">
+                <tr ng-repeat="order in driversList">
+                    <td>{{$index + 1}}</td>
+                    <td>{{ order.pack.name }}</td> 
+                    <td>{{ order.customer.companyName || order.customer.name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.isActive }}</td>
+                    <td>{{ order.weeks }}</td>
+                    <td>{{ order.days.toString() }}</td>
+                    <td>{{ order.orderDriver }}</td>
+                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
+                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+                    <td><button class="btn" ng-click="markAsCompleted(order._id, $index)">Mark as completed</button></td>
+                </tr>
+              </table>
+              <hr/>
+        </div>
 
-	     <ul class="unstyled" ng-repeat="order in orderList.orders">
-	        <li>{{ order.orderId }}</li>
-	        <li> <input type="text" ng-model="order.pack" class="form-control"></li>
-	        <li> <input type="text" ng-model="order.customer" class="form-control"></li>
-	        <li><input type="text" ng-model="order.address" class="form-control"></li>
-	        <li>isActive: <input type="checkbox" ng-model="order.isActive" class="form-control"></li>
-	        <li><input type="text" ng-model="order.weeks"></li>
-	        <li><input type="text" ng-model="order.days" class="form-control"></li>
-	        <li><input type="text" ng-model="order.firstDeliveryDate" class="form-control"></li>
-	        <li>Order # {{ order.id }}</li>    
-	            
-	        <a class="btn" href="#orders/{{ order.orderId }}">Show</a>    
-	        <button class="btn btn-danger" ng-click="orderList.removeOrder($index)" aria-label="Remove">X</button>
-	        <button class="btn" ng-click="orderList.save()" aria-label="Remove">Save</button>
-	           
-	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
-	         
-	      </ul>
+	   	<table>
+	   		<thead>
+			  <tr>
+			     <th>ID</th>
+			     <th>Pack</th>
+			     <th>Customer</th>
+			     <th>Week</th>
+			     <th>Days</th>
+			     <th>Change Status</th>
+			     <th>Status</th>
+			     <th>Change Driver</th>
+			     <th>Driver</th>
+			  </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="order in newOrderList">
+		    	<td>{{$index + 1}}</td>
+		    	<td>{{ order.pack.name }}</td> 
+		    	<td>{{ order.customer.name }}</td>
+		    	<td>{{ order.weeks }}</td>
+		    	<td>{{ order.days.toString() }}</td>
+		    	
+		    	<td><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></td>
+	        	<td>{{ order.orderStatus}}</td>
+	        	<td><select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></td>	
+	        	<td>{{order.orderDriver}}</td>	
+		  </tr>
+			</tbody>	  
+		</table>
+	 
     </div>

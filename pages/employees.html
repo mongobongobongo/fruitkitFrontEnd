@@ -1,37 +1,41 @@
-<!-- orders.html -->
+<!-- employees.html -->
     <div class="">
-        <h1>Order list Page</h1>
+        <h1>Employees list Page</h1>
 
-        <p>{{ message }}</p>
-         <!-- add new order -->
-         <form ng-submit="orderList.addOrder()">
-	        <input type="text" ng-model="orderList.defaultPack"  size="30" placeholder="add name">
-	        <input type="text" ng-model="orderList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="orderList.defaultDelivery">
-	        Every week: 
-	        every: <input type="checkbox" ng-init="orderList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-init="orderList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-init="orderList.setOddWeek() " >		
-	        <input class="btn-primary" type="submit" value="add">
-	     </form>
-
-	     <ul class="unstyled" ng-repeat="order in orderList.orders">
-	        <li>{{ order.orderId }}</li>
-	        <li> <input type="text" ng-model="order.pack" class="form-control"></li>
-	        <li> <input type="text" ng-model="order.customer" class="form-control"></li>
-	        <li><input type="text" ng-model="order.address" class="form-control"></li>
-	        <li>isActive: <input type="checkbox" ng-model="order.isActive" class="form-control"></li>
-	        <li><input type="text" ng-model="order.weeks"></li>
-	        <li><input type="text" ng-model="order.days" class="form-control"></li>
-	        <li><input type="text" ng-model="order.firstDeliveryDate" class="form-control"></li>
-	        <li>Order # {{ order.id }}</li>    
-	            
-	        <a class="btn" href="#orders/{{ order.orderId }}">Show</a>    
-	        <button class="btn btn-danger" ng-click="orderList.removeOrder($index)" aria-label="Remove">X</button>
-	        <button class="btn" ng-click="orderList.save()" aria-label="Remove">Save</button>
-	           
-	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
-	         
-	      </ul>
+        <div><button ng-click="toggle()">Add employee</button> </div>
+         <!-- add new employee -->
+         <div  ng-show="showForm">
+            <form ng-submit="addEmployee()">
+                <div>
+                    <p>Name:</p>
+                    <input type="text" ng-model="employeeName"  size="30" placeholder="name">
+                    <p>Surname:</p>
+                    <input type="text" ng-model="employeeSurname"  size="30" placeholder="name">
+                </div>
+                <div>
+                    <p>Phone:</p>
+                    <input type="text" ng-model="employeePhone"  size="70" placeholder="phone">  
+                </div>
+                <input class="button-add" type="submit" value="add">
+            </form>
+         </div>
+        <div>
+            <table>
+                <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="employee in employees">
+                        <td>{{$index + 1}}</td>
+                        <td>{{employee.firstName}}</td> 
+                        <td> <button ng-click="remove(employee._id, $index)">x</button> </td>  
+                    </tr>
+                </tbody>      
+            </table>
+        </div>    
     </div>
     

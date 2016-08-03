@@ -1,59 +1,60 @@
 <!-- customers.html -->
     <div class=" text-center">
-        <h1>Customer list Page</h1>
-
-        <p>{{ message }}</p>
-         <span>{{customerList.remaining()}} of {{customerList.customers.length}} remaining</span>
-
+        <h2>Customers</h2>
          <!-- add new customer -->
-         <form ng-submit="customerList.addCustomer()">
-	        <input type="text" ng-model="customerList.defaultName"  size="30" placeholder="add name">
-	        <input type="text" ng-model="customerList.defaultAddress"  size="70" placeholder="add address">
-	        Delivery: <input type="checkbox" ng-model="customerList.defaultisActive">
-	        Every week: 
-	        every: <input type="checkbox" ng-click="customerList.setEveryWeek() " >	
-	        even: <input type="checkbox" ng-click="customerList.setEvenWeek() " >
-	        odd: <input type="checkbox" ng-click="customerList.setOddWeek() " >		
-	        <input class="btn-primary" type="submit" value="add">
-	      </form>
+         <div class="add">
+            <button ng-click="toggle()">Add customer</button>
+         </div>
+         <div class="addCustomerForm" ng-show="showForm">
+            <form ng-submit="addCustomer()">
+                <span>Name of a person in contact:</span>
+                <input type="text" ng-model="customerName"  size="30" placeholder="name">
+                <span>His/Her surname:</span>
+                <input type="text" ng-model="customerSurname"  size="30" placeholder="surname">
+                <span>Is it a company?</span>
+                <input type="checkbox" ng-click="setIsCompany()">
+                <span>if yes, what is the company name?</span>
+                <input type="text" ng-model="companyName"  size="30" placeholder="companyName">
+                <span>City:</span>
+                <input type="text" ng-model="customerCity"  size="30" placeholder="city">
+                <span>Postcode:</span>
+                <input type="text" ng-model="customerPostcode"  size="30" placeholder="postcode">
+                <span>Address:</span>
+                <input type="text" ng-model="customerStreet"  size="30" placeholder="street">
+                <span>Email:</span>
+                <input type="text" ng-model="customerEmail"  size="30" placeholder="email">
+                <span>Phone:</span>
+                <input type="text" ng-model="customerPhone"  size="30" placeholder="phone">
+                <input type="submit" value="add" class="button-add">
+              </form>
+         </div>
 
 
-       Search:<input ng-model="query" type="text"/>
-      <ul class="unstyled" ng-repeat="customer in customerList.customers ">
-        <li >
-        	<span class=" ">{{customer.id}}</span>
-        </li>
-        <li><!--<span class=" ">{{customer.name}}</span>-->
-            <input type="text" ng-model="customer.name" class="form-control">
-        </li>
-        <li>
-        	<!--<span class=" ">{{customer.address}}</span>-->
-            <input type="text" ng-model="customer.address" class="form-control">
-        </li>
-        <li>
-        	<!--<span class=" ">{{customer.delivery}}</span>-->
-            isActive: <input type="checkbox" ng-model="customer.isActive" class="form-control">
-        </li>
-        <li>
-        	<!--<span class=" ">{{customer.weeks}}</span>-->
-        	<input type="text" ng-model="customer.weeks">
-        </li>
-        <li>
-        	<!-- <span class=" ">{{customer.days.toString()}}</span>-->
-        	<input type="text" ng-model="customer.days" class="form-control">
-        </li>
-        <li>
-        	 <!--<span class=" ">{{customer.firstDeliveryDate}}</span>-->
-        	 <input type="text" ng-model="customer.firstDeliveryDate" class="form-control">
-        </li>
-            
-            
-            
-        <button class="btn btn-danger" ng-click="customerList.removeCustomer($index)" aria-label="Remove">X</button>
-        <button class="btn" ng-click="customerList.save()" aria-label="Remove">Save</button>
-           
-            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
-         
-      </ul>
+        <table>
+            <thead>
+              <tr>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Address</th>
+                 <th>Email</th>
+                 <th>Phone</th>
+                 <th>Status</th>
+                 <th>Company Name</th>
+                 <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customer in customers">
+                    <td>{{$index + 1}}</td>
+                    <td>{{ customer.name }} {{ customer.surname }}</td> 
+                    <td>{{ customer.street }} {{ customer.city }} {{ customer.postcode }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.isCompany }} </td>
+                    <td>{{ customer.companyName }}</td>
+                    <td> <button class="btn" ng-click="removeCustomer(customer._id, $index)">x</button> </td>  
+                </tr>
+            </tbody>      
+        </table>
 
     </div>

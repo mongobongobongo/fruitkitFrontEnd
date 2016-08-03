@@ -1,25 +1,38 @@
-fruitkitControllers.controller('singleOrderController', ['$scope', '$routeParams','$location', '$http', 'GetJson', function($scope, $routeParams, $location, $http, GetJson) {
-$scope.message = 'This is one order here';
-      //push orders into array as we receive the json 
-    GetJson.fetchAllOrders().success(function (response) {
-        $scope.allData = response;
-        $scope.newOrderList = [];
-        console.log(response);
-        console.log($scope.allData );
-        
-        $scope.orderID = $routeParams.orderId;
-         console.log($scope.orderID);
-        $scope.thisOrder = {};
-        //console.log($scope.ordersJson.orders);
-        //console.log($scope.ordersJson.orders);
-       angular.forEach($scope.allData.orders, function(order) {
-             if(order.orderId == $routeParams.orderId){
-              $scope.thisOrder = order;
-              console.log("this order", $scope.thisOrder);
-             }
+fruitkitControllers.controller('singleOrderController', ['$scope', '$routeParams','$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer) {
+    $scope.message = 'This is one order here';
 
+    connectToKallesServer.getOrders(function (data) {
+        $scope.orders = data;   
+        $scope.orderID = $routeParams.orderId;
+        $scope.thisOrder = {};
+        angular.forEach($scope.orders, function(order) {
+            if(order._id == $routeParams.orderId){
+                $scope.thisOrder = order;
+            }
         }); 
-       
-     });
+    });
+
+    connectToKallesServer.getCustomers(function (data) {
+        $scope.customers = data;
+    });
+
+    connectToKallesServer.getPackages(function (data) {
+        $scope.packs = data;
+    });
+
+    $scope.changedOrderPack = function(changedValue, id){ 
+        connectToKallesServer.putOrder({
+             pack: changedValue
+        },id);
+    };
+    $scope.changedOrderCustomer = function(changedValue, id){ 
+        connectToKallesServer.putOrder({
+             customer: changedValue
+        },id);
+    };
+
+    $scope.toggle = function(){
+        $scope.showForm = !$scope.showForm;
+    };
 }]);
 

@@ -1,0 +1,37 @@
+<!-- today.html -->
+    <div class="text-center">
+        <h2>Today</h2>
+
+        <!-- add new order -->
+        <p>Today</p>
+	  <ul class="list" >
+	        <li ng-repeat="order in todayOrderList">
+	        	<span>{{$index + 1}}</span>
+	        	<span>{{ order.pack.name }}</span>
+	        	<span>{{ order.customer.name }}</span>
+	        	<span>{{ order.weeks }}</span>
+	        	<span>{{ order.days.toString() }}</span>
+	        	<span>{{ order.status }}</span>
+	        	<select ng-options="status for status in order.statusList" ng-model="order.status" ng-change="changedValue(order.status, order._id, $index)" ></select>
+	        	<select ng-options="customer.name for customer in customers" ng-model="order.driver" ></select>	
+	        	
+	        </li>
+	      </ul>
+	     <p>Tomorrow</p>
+
+
+	      <ul class="list" >
+	        <li ng-repeat="order in tomorrowOrderList">
+	        	<span>{{$index + 1}}</span>
+	        	<span>{{ order.pack.name }}</span>
+	        	<span>{{ order.customer.name }}</span>
+	        	<span>{{ order.weeks }}</span>
+	        	<span>{{ order.days.toString() }}</span>
+	        	<span>{{ order.status }}</span>
+	        	<select ng-options="status for status in order.statusList" ng-model="order.status" ng-change="changedValue(order.status, order._id, $index)" ></select>
+	        	<select ng-options="customer.name for customer in customers" ng-model="order.driver" ></select>	
+	        	
+	        </li>
+	      </ul>
+	 
+    </div>

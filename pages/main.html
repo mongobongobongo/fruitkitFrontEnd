@@ -1,0 +1,26 @@
+ <div class="">
+        <h1>Order list Page</h1>
+
+         <!-- add new order -->
+         <div>
+           <p>{{ message }}</p>
+         </div>
+         <div>
+            <ul>
+                <li ng-repeat="order in orders" class="mainPageList">
+                    <p class="titleForCompany">{{ order.customer.companyName || order.customer.name }}</p>
+                    <p>{{ order.pack.name }}</p> 
+                    <p>{{ order.address }}</p>
+                    <td>{{ order.isActive }}</td>
+                    <td>{{ order.weeks }}</td>
+                    <td>{{ order.days.toString() }}</td>
+                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
+                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+                </li>
+            </ul>
+                
+                
+        </table>
+         </div>
+         
+    </div>
