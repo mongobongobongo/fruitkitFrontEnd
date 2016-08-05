@@ -1,8 +1,30 @@
-fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
-  $scope.message = 'Every order will be displayed here';
+fruitkitControllers.controller('ordersController', 
+  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
+  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+
+  //scope variables  
   $scope.orders = [];
-  $scope.driverToSort = [];
+  $scope.packs = [];
+  $scope.customers = [];
+  $scope.employees = [];
   $scope.driversList  = [];
+
+  //WTF???
+  $scope.driverToSort = [];
+
+
+  //info
+  $scope.orderCustomer = "";
+  $scope.orderHeadquarter = "";
+  $scope.orderPack = "";
+  $scope.orderAddress = "";
+  $scope.orderDays = [];
+  $scope.orderFirstsDeliveryDate = "";
+  $scope.orderStatus = "";
+  $scope.orderDriver = "";
+  $scope.orderIsActive = "";
+  $scope.details = "";
+  $scope.telephone = " ";
 
   connectToKallesServer.getOrders(function (data) {
     $scope.orders = data;
@@ -19,18 +41,6 @@ fruitkitControllers.controller('ordersController', ['$scope', '$routeParams' ,'$
   connectToKallesServer.getEmployees(function(data){
      $scope.employees = data;
   });
-
-  $scope.orderCustomer = "";
-  $scope.orderAddress = "";
-  //$scope.orderPack = $scope.selectedPack || "no pack";
-  $scope.orderPack = "";
-  $scope.orderDays = [];
-  $scope.orderFirstsDeliveryDate = "";
-  $scope.orderStatus = "";
-  $scope.orderDriver = "";
-  $scope.orderIsActive = "";
-  $scope.details = "";
-  $scope.telephone = " ";
 
 
   function resetAddForm(){
