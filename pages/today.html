@@ -19,7 +19,29 @@
 	    </ul>-->
 	    <div>
               <hr/>
-                <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort" ng-change="sortBy(driverToSort)"></select>
+              	<label>By pack</label>
+                <select ng-options="pack.name for pack in packs" ng-model="packToSort" ng-change="sortByPack(packToSort)"></select>
+                {{ packToSort.name }}
+              <table class="friends">
+                <tr ng-repeat="order in packList">
+                    <td>{{$index + 1}}</td>
+                    <td>{{ order.pack.name }}</td> 
+                    <td>{{ order.customer.companyName || order.customer.name }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.isActive }}</td>
+                    <td>{{ order.weeks }}</td>
+                    <td>{{ order.days.toString() }}</td>
+                    <td>{{ order.orderDriver }}</td>
+                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
+                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+                    <td><button class="btn" ng-click="markAsCompleted(order._id, $index)">Mark as completed</button></td>
+                </tr>
+              </table>
+              <hr/>
+
+              <hr/>
+              	<label>Drivers:</label>
+                <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort" ng-change="sortByDriver(driverToSort)"></select>
                 {{ driverToSort.firstName }}
               <table class="friends">
                 <tr ng-repeat="order in driversList">
@@ -64,7 +86,7 @@
 		    	<td><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></td>
 	        	<td>{{ order.orderStatus}}</td>
 	        	<td><select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></td>	
-	        	<td>{{order.orderDriver}}</td>	
+	        	<td>{{order.orderDriver.firstName}}</td>	
 		  </tr>
 			</tbody>	  
 		</table>

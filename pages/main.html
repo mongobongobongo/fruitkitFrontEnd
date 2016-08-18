@@ -1,26 +1,41 @@
  <div class="">
-        <h1>Order list Page</h1>
-
-         <!-- add new order -->
-         <div>
-           <p>{{ message }}</p>
-         </div>
-         <div>
-            <ul>
-                <li ng-repeat="order in orders" class="mainPageList">
-                    <p class="titleForCompany">{{ order.customer.companyName || order.customer.name }}</p>
-                    <p>{{ order.pack.name }}</p> 
-                    <p>{{ order.address }}</p>
-                    <td>{{ order.isActive }}</td>
-                    <td>{{ order.weeks }}</td>
-                    <td>{{ order.days.toString() }}</td>
-                    <td> <button class="btn"><a href="#orders/{{ order._id }}">More</a></button> </td>  
-                    <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
-                </li>
-            </ul>
-                
-                
-        </table>
-         </div>
-         
+    <h1>Order list Page</h1>
+    <div>
+        <label>By pack</label>
+        <select ng-options="pack.name for pack in packs" ng-model="packToSort"></select>
+        <label>Drivers:</label>
+        <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort"></select>
+        <label>Days:</label>
+        <select ng-options="day for day in lostOfdays" ng-model="dayToSort"></select>
+        <label>Status:</label>
+        <select ng-options="status for status in listOfstatuses " ng-model="statusToSort" ></select>
+        <label>Reset</label>
+        <button ng-click="resetSort()">Reset</button>
     </div>
+    <div>
+        <ul>
+            <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: orderStatus" class="mainPageList">
+
+                <span class="titleForCompany">{{ order.customer.companyName || order.customer.name }}</span>
+                <span class="assignedDriver">{{order.orderDriver.firstName}}</span> 
+                <span>Change driver: <select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></span>    
+                <span>{{ order.pack.name }}</span> 
+                <span>{{ order.address }}</span>
+                <span>{{ order.weeks }}</span>
+                <span>{{ order.days.toString() }}</span>
+                <span><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></span>
+                <span>{{ order.orderStatus}}</span>
+                <span><button class="btn" ng-click="showExtraInfo(order._id, $index)">More</button> </span>  
+
+                <p><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></p>
+            </li>
+        </ul>
+        <div class="extra-info" ng-show="showextra">
+            {{ datailOrder }}
+            <p>{{ datailOrder.customer.name }}</p>
+            <p> {{ datailOrder.address }}</p>
+            <button ng-click="hideDetails()">Hide</button>
+        </div>
+    </div>
+         
+</div>

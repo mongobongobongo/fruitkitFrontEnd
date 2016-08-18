@@ -38,11 +38,11 @@ table th, td{
 
 .mainPageList{
 	display: inline-block;
-	width: 25%;
-	margin-right: 20px;
+	width: 23%;
+	margin-right: 5px;
 	margin-bottom: 20px;
 	list-style-type: none;
-	background-color: green;
+	background-color: lightgrey;
 	height: auto;
 }
 
@@ -50,4 +50,15 @@ table th, td{
 	background-color: pink;
 	display: block;
 	border: 1px solid black;
+}
+
+.extra-info{
+	position: fixed;
+	top: 30%;
+	background-color: pink;
+}
+
+.assignedDriver{
+	background-color: lightblue;
+	padding: 5px;
 }

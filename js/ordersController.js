@@ -12,19 +12,25 @@ fruitkitControllers.controller('ordersController',
   //WTF???
   $scope.driverToSort = [];
 
-
   //info
   $scope.orderCustomer = "";
   $scope.orderHeadquarter = "";
+
   $scope.orderPack = "";
+
+  $scope.orderPacks = [];
+
   $scope.orderAddress = "";
+  $scope.orderAddressMaps = "";
   $scope.orderDays = [];
   $scope.orderFirstsDeliveryDate = "";
   $scope.orderStatus = "";
-  $scope.orderDriver = "";
+  $scope.orderDriver = { };
+  $scope.orderDriver.firstName = "";
   $scope.orderIsActive = "";
-  $scope.details = "";
-  $scope.telephone = " ";
+  $scope.orderDetails = "";
+  $scope.orderContactPerson = "";
+  $scope.orderContactPersonTelephone = " ";
 
   connectToKallesServer.getOrders(function (data) {
     $scope.orders = data;
@@ -42,11 +48,11 @@ fruitkitControllers.controller('ordersController',
      $scope.employees = data;
   });
 
-
   function resetAddForm(){
     $scope.orderCustomer = "";
     $scope.orderAddress = "";
-    $scope.orderPack = "no pack";
+    $scope.orderPack = "";
+    $scope.orderPacks = [];
     $scope.orderDays = [];
     $scope.orderFirstsDeliveryDate = "";
     $scope.orderStatus = "";
@@ -65,6 +71,10 @@ fruitkitControllers.controller('ordersController',
     $scope.showForm = !$scope.showForm;
   };
 
+ $scope.addPack = function(orderPack){
+    $scope.orderPacks.push(orderPack);
+ } 
+
 	$scope.isActive = function(){
 		$scope.orderIsActive = true;
     $scope.activeCheck = true;
@@ -80,13 +90,13 @@ fruitkitControllers.controller('ordersController',
 	$scope.selectWeek = function(week){
 		if(week == "even"){
 			$scope.orderWeeks = "even";
-      $scope.everyCheck = true;
-      $scope.evenCheck = false;
+      $scope.everyCheck = false;
+      $scope.evenCheck = true;
       $scope.oddCheck = false;
 		} else if(week == "every"){
 			$scope.orderWeeks = "every";
-      $scope.everyCheck = false;
-      $scope.evenCheck = true;
+      $scope.everyCheck = true;
+      $scope.evenCheck = false;
       $scope.oddCheck = false;
 		} else{
 			$scope.orderWeeks = "odd";
@@ -96,6 +106,8 @@ fruitkitControllers.controller('ordersController',
 		}
 	};
 
+  //record "uncheck event" to track which days were 
+
 	$scope.addDay = function(day){
 		$scope.orderDays.push(day);
 	};
@@ -103,16 +115,18 @@ fruitkitControllers.controller('ordersController',
   $scope.addOrder = function(){
     $scope.order = {};
     $scope.order.address = $scope.orderAddress  || "no address";
-    $scope.order.pack = $scope.orderPack  || "no pack";
+    //$scope.order.pack = $scope.orderPacks || "no pack";
+    $scope.order.pack = $scope.orderPack || "no pack";
     $scope.order.isActive = $scope.orderIsActive || false;
     $scope.order.weeks = $scope.orderWeeks ||  "no weeks";
     $scope.order.days = $scope.orderDays ||  "no days";
     $scope.order.firstDelivery = $scope.orderFirstsDeliveryDate  ||  "no first delivery";
     $scope.order.customer = $scope.orderCustomer  ||  "no customer";
-    $scope.order.orderDriver = $scope.orderDriver || "no driver";
+    $scope.order.orderDriver = {};
+    $scope.order.orderDriver.firstName = $scope.orderDriver.firstName || "no driver";
     $scope.order.orderStatus = $scope.orderStatus || "not packed";
     $scope.order.statusList = ["not packed", "packed", "to be picked", "picked", "delivered" ];
-    $scope.order.details = $scope.details || " ";
+    $scope.order.details = $scope.orderDetails || " ";
     $scope.order.telephone = $scope.telephone || " ";
     $scope.orders.push($scope.order);
     connectToKallesServer.postOrders( $scope.order);
@@ -127,14 +141,12 @@ fruitkitControllers.controller('ordersController',
   };
 
   $scope.sortBy = function(driverToSort){
-
+    $scope.driversList = [];
     angular.forEach($scope.orders, function(order){
             //$scope.order =  order;
-            if(order.orderDriver === driverToSort.firstName){
+            if(order.orderDriver.firstName === driverToSort.firstName){
                  $scope.driversList.push(order);
             }
-
-           
         });
   }
      

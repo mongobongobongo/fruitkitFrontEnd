@@ -1,19 +1,80 @@
 fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
-    $scope.message = 'Every order will be displayed here';
+    
+    $scope.driversList = [];
+    $scope.packList = [];
     $scope.orders = [];
+    $scope.packs = [];
+    $scope.employees = [];
 
-    connectToKallesServer.getOrders(function (data) {
-      $scope.orders = data;
-      console.log("real orders", $scope.orders );
-    });
+    $scope.statusToSort = "";
+    $scope.listOfstatuses = ["not packed", "packed", "to be picked", "picked", "delivered" ];
+
+    $scope.dayToSort = "";
+    $scope.lostOfdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    $scope.driverToSort = "";
+    $scope.packToSort = "";
+
+
+    $scope.showextra = false;
+    $scope.datailOrder = "";
+
+
+    $scope.resetSort = function(){
+      $scope.statusToSort = "";
+      $scope.driverToSort = "";
+      $scope.packToSort = "";
+      $scope.dayToSort = "";
+    }
 
     connectToKallesServer.getPackages(function (data) {
       $scope.packs = data;
       console.log("real packages", $scope.packs );
     });
 
+    connectToKallesServer.getOrders(function (data) {
+        $scope.orders = data;
+    });
 
-	
+    connectToKallesServer.getEmployees(function (data) {
+        $scope.employees = data;
+        $scope.employees.push({firstName: "no driver"});
+    });
+
+    connectToKallesServer.getCustomers(function (data) {
+      $scope.customers = data;
+    });
+
+     $scope.changedOrderStatus = function(changedValue, id, $index){ 
+        connectToKallesServer.putOrder({
+             orderStatus: changedValue
+        },id);
+    };
+
+    $scope.changedDriver = function(changedValue, id, $index){ 
+        console.log(changedValue);
+        connectToKallesServer.putOrder({
+             orderDriver: {firstName: changedValue}
+        },id);
+    };
+
+    $scope.getOrder = function(id, index){
+      connectToKallesServer.getOrder(function(data){
+        $scope.datailOrder = data;
+      },id);
+    };
+
+    $scope.showExtraInfo = function(id , $index){
+      $scope.getOrder(id , $index);
+      $scope.showextra = true;
+
+    }
+
+    $scope.hideDetails = function(){
+      $scope.showextra = false;
+    }
+
+
 	$scope.orderAddress = "";
 	$scope.orderPack = $scope.selectedPack || "no pack";
 	$scope.orderCustomer = "";
@@ -39,11 +100,6 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
 	$scope.addDay = function(day){
 		$scope.orderDays.push(day);
 	};
-
-	
-  	connectToKallesServer.getCustomers(function (data) {
-      $scope.customers = data;
-  	});
 
 	$scope.toggle = function(){
 	  	$scope.showForm = !$scope.showForm;
@@ -76,6 +132,24 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
       connectToKallesServer.deleteOrder(id);
       $scope.orders.splice(index, 1);
      };
+
+    $scope.sortByPack = function(packToSort){
+        $scope.packList = [];
+        angular.forEach($scope.orders, function(order){
+            if(order.pack.name === packToSort.name){
+                 $scope.packList.push(order);
+            }
+        });
+    }
+
+    $scope.sortByDriver = function(driverToSort){
+        $scope.driversList = [];
+        angular.forEach($scope.orders, function(order){
+            if(order.orderDriver.firstName === driverToSort.firstName){
+                $scope.driversList.push(order);
+            }
+        });
+    }
      
 
 }]);

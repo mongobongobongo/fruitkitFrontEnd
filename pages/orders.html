@@ -8,30 +8,24 @@
          </div>
          <div ng-show="showForm">
 	         <form ng-submit="addOrder()">
-                <div>
                     <p>What fruitpack do you deliver?</p>
-                    <select ng-options="pack.name for pack in packs" ng-model="orderPack"></select> 
-                </div>
-                <div>
+                    <select ng-options="pack.name for pack in packs" ng-model="orderPack" ng-change="addPack(orderPack)"></select> 
+                
                     <p>Customer: </p> 
                     <select ng-options="customer.name for customer in customers" ng-model="orderCustomer"></select>
-                </div>
-                <div>
+               
                     <p>What is the address that you deliver to?</p>
                     <input type="text" ng-model="orderAddress"  size="70" placeholder="add address">
-                </div>
-		        <div>
+              
                     <p>Is it active by default?</p>
                     <input type="checkbox" ng-click="isActive()" ng-checked="activeCheck"><span>active</span>
                     <input type="checkbox" ng-click="isNotActive()" ng-checked="nonactiveCheck"><span>not active</span>
-                </div>
-                <div>
+              
                     <p>Select weeks:</p>
                     <input type="checkbox" ng-click="selectWeek('every')" ng-checked="everyCheck"> <span>every</span> 
                     <input type="checkbox" ng-click="selectWeek('even')" ng-checked="evenCheck"> <span>even</span> 
                     <input type="checkbox" ng-click="selectWeek('odd')" ng-checked="oddCheck"> <span>odd</span>
-                </div>
-                <div>
+                
                     <p>Select days:</p>
                     <input type="checkbox" ng-click="addDay('Monday')" ng-checked="dayChecked"> <span>Monday</span>
                     <input type="checkbox" ng-click="addDay('Tuesday')"  ng-checked="dayChecked"> <span>Tuesday</span>
@@ -40,21 +34,17 @@
                     <input type="checkbox" ng-click="addDay('Friday')"  ng-checked="dayChecked"> <span>Friday</span>
                     <input type="checkbox" ng-click="addDay('Saturday')"  ng-checked="dayChecked"> <span>Saturday</span>
                     <input type="checkbox" ng-click="addDay('Sunday')" ng-checked="dayChecked"> <span>Sunday</span>
-                </div>
-                <div>
+                
                     <p>Delivery details</p>
-                    <input type="text" size="200" ng-model="details">
-                </div>
-                <div>
+                    <input type="text" size="200" ng-model="orderDetails">
+              
                     <p>Delivery phone</p>
                     <input type="text" size="200" ng-model="telephone">
-                </div>
-                <div>
+               
                     <p>Pick first delivery date: </p>
                     <input type="date" ng-model="orderFirstsDeliveryDate" size="30" placeholder="add date"> 
-                </div>
-		        	
-		        <input class="button-add" type="submit" value="add">
+            
+		                <input class="button-add" type="submit" value="add">
 		     </form>
          </div>
          <div>

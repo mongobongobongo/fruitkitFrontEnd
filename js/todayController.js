@@ -1,9 +1,27 @@
 
 fruitkitControllers.controller('todayController', ['$scope', '$location', '$http', 'GetJson', 'weekdayToNumber', 'connectToKallesServer', function($scope, $location, $http, GetJson, weekdayToNumber, connectToKallesServer) {
-    $scope.message = 'Orders for today will be here!';
     $scope.today = new Date();
     var orderList = this;
     $scope.driversList = [];
+    $scope.packList = [];
+    $scope.orders = [];
+    $scope.packs = [];
+    $scope.employees = [];
+
+    connectToKallesServer.getOrders(function (data) {
+        $scope.orders = data;
+        console.log("real orders", $scope.orders );
+        $scope.defineOrdersForToday(data);
+    });
+
+    connectToKallesServer.getEmployees(function (data) {
+        $scope.employees = data;
+    });
+
+    connectToKallesServer.getPackages(function (data) {
+        $scope.packs = data;
+         console.log("real packs", $scope.packs);
+    });
 
     //get the number of the day from string
     $scope.weekdayToNumber = function(day){
@@ -16,6 +34,8 @@ fruitkitControllers.controller('todayController', ['$scope', '$location', '$http
 		return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
 	};
 
+	//get current week number
+	$scope.weekno = $scope.today.getWeek();
 
     $scope.changedOrderStatus = function(changedValue, id, $index){ 
         connectToKallesServer.putOrder({
@@ -24,23 +44,11 @@ fruitkitControllers.controller('todayController', ['$scope', '$location', '$http
     };
 
     $scope.changedDriver = function(changedValue, id, $index){ 
+        console.log(changedValue);
         connectToKallesServer.putOrder({
-             orderDriver: changedValue
+             orderDriver: {firstName: changedValue}
         },id);
     };
-
-	//get current week number
-	$scope.weekno = $scope.today.getWeek();
-
-    connectToKallesServer.getOrders(function (data) {
-        $scope.orders = data;
-        console.log("real orders", $scope.orders );
-        $scope.defineOrdersForToday(data);
-    });
-
-    connectToKallesServer.getEmployees(function (data) {
-        $scope.employees = data;
-    });
 
     $scope.defineOrdersForToday = function(response){
         $scope.newOrderList = [];
@@ -59,30 +67,31 @@ fruitkitControllers.controller('todayController', ['$scope', '$location', '$http
 
                     numbers.map(function processDayNumbers(deliveryDay){
                         if($scope.today.getDay() == deliveryDay){
-                                    //console.log("we have to deliver today!");
                             $scope.newOrderList.push($scope.order);
-                        } else{
-                                    //console.log("not today!");
-                        }
+                        } else{ }
                     });
                 }
-            }
-           
+            } 
         });
-
-         orderList.orders = $scope.newOrderList;
+        orderList.orders = $scope.newOrderList;
     };
 
-    $scope.sortBy = function(driverToSort){
-
+    $scope.sortByPack = function(packToSort){
+        $scope.packList = [];
         angular.forEach($scope.orders, function(order){
-                //$scope.order =  order;
-                if(order.orderDriver === driverToSort.firstName){
-                     $scope.driversList.push(order);
-                }
+            if(order.pack.name === packToSort.name){
+                 $scope.packList.push(order);
+            }
+        });
+    }
 
-               
-            });
-      }
+    $scope.sortByDriver = function(driverToSort){
+        $scope.driversList = [];
+        angular.forEach($scope.orders, function(order){
+            if(order.orderDriver.firstName === driverToSort.firstName){
+                $scope.driversList.push(order);
+            }
+        });
+    }
   	 
 }]);

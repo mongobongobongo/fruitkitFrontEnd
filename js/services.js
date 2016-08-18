@@ -86,7 +86,6 @@ fruitkitServices.service('connectToKallesServer', ['$http', function($http){
 		.success(function(data){
 			console.log(data);                        
 			callback(data);
-
         });
 	};
 
