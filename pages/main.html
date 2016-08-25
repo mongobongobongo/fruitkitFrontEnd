@@ -1,41 +1,64 @@
- <div class="">
-    <h1>Order list Page</h1>
-    <div>
-        <label>By pack</label>
-        <select ng-options="pack.name for pack in packs" ng-model="packToSort"></select>
-        <label>Drivers:</label>
-        <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort"></select>
-        <label>Days:</label>
-        <select ng-options="day for day in lostOfdays" ng-model="dayToSort"></select>
-        <label>Status:</label>
-        <select ng-options="status for status in listOfstatuses " ng-model="statusToSort" ></select>
-        <label>Reset</label>
+<!-- main.html --> 
+<div class="main-page">
+    <h2>Main Page</h2>
+
+    <div class="sort-by-section">
+        <span> <b>Sort By</b></span><br>
+        <div>
+            <label>Pack:</label><br>
+            <select ng-options="pack.name for pack in packs" ng-model="packToSort"></select>
+        </div>
+        <div>
+            <label>Drivers:</label><br>
+            <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort"></select>
+        </div>
+        <div>
+            <label>Days:</label><br>
+            <select ng-options="day for day in lostOfdays" ng-model="dayToSort"></select>
+        </div>
+        <div>
+            <label>Status:</label><br>
+            <select ng-options="status for status in listOfstatuses " ng-model="statusToSort" ></select>
+        </div>  
         <button ng-click="resetSort()">Reset</button>
     </div>
-    <div>
+
+    <div class="main-list-of-orders">
         <ul>
-            <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: orderStatus" class="mainPageList">
-
-                <span class="titleForCompany">{{ order.customer.companyName || order.customer.name }}</span>
-                <span class="assignedDriver">{{order.orderDriver.firstName}}</span> 
-                <span>Change driver: <select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></span>    
-                <span>{{ order.pack.name }}</span> 
-                <span>{{ order.address }}</span>
-                <span>{{ order.weeks }}</span>
-                <span>{{ order.days.toString() }}</span>
-                <span><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></span>
-                <span>{{ order.orderStatus}}</span>
-                <span><button class="btn" ng-click="showExtraInfo(order._id, $index)">More</button> </span>  
-
-                <p><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></p>
+            <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: '-orderStatus'" class="main-page-list-item" >
+                <span class="titleForCompany" ng-class="{yellowNotPacked: colorCodeNotPacked(order), orangePacked: colorCodePacked(order), bluePicked: colorCodePicked(order), redDelivered: colorCodeDelivered(order)}">{{ order.customer.companyName || order.customer.name }} - {{ order.pack.name }}</span>
+                <div class="order-info">
+                    <span class="orderDetails"> {{ order.details }}</span> 
+                    <span class="orderDays"><b>Days:</b> {{ order.days.toString() }}</span>
+                    <span class="assignedDriver">
+                        <b>Driver:</b> {{order.orderDriver.firstName}}
+                        <span> <select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></span>
+                    </span> 
+                    <span class="orderStatus">
+                        <b>Status:</b> {{ order.orderStatus}}
+                         <span><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></span>
+                    </span>
+                </div>
+                <span><button class="btn" ng-click="showExtraInfo(order._id, $index)">More</button> </span>
             </li>
         </ul>
-        <div class="extra-info" ng-show="showextra">
-            {{ datailOrder }}
-            <p>{{ datailOrder.customer.name }}</p>
-            <p> {{ datailOrder.address }}</p>
-            <button ng-click="hideDetails()">Hide</button>
+    </div>
+    <div class="wrapper" ng-show="showextra">
+        <div class="extra-info" >
+            <span class="delivery-info-title">Delivery Info <button ng-click="hideDetails()">x</button></span>
+            <div class="info">
+                <p><b>Client:</b> {{ datailOrder[0].customer.name }}</p>
+                <p><b>Address:</b> {{ datailOrder[0].address }}</p>
+                <p><b>Contact: </b>{{ datailOrder[0].address }}  {{ datailOrder[0].customer.city}}  {{ datailOrder[0].customer.postcode }} {{ datailOrder[0].customer.street}} </p>
+                <p><b>Type:</b> {{ datailOrder[0].customer.isCompany}} </p>
+                <p><b>Info:</b> {{ datailOrder[0].details}} </p>
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.8428452431867!2d24.940432815666686!3d60.16678048195964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bcbfd5a119b%3A0x3aae77498228fa91!2sReaktor+Ventures+Oy!5e0!3m2!1sen!2sfi!4v1471769266781" width="600" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
         </div>
     </div>
+    
          
 </div>

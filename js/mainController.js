@@ -1,24 +1,101 @@
-fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
-    
-    $scope.driversList = [];
-    $scope.packList = [];
+fruitkitControllers.controller(
+  'mainController', 
+  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
+  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+
+    //scope variables
     $scope.orders = [];
     $scope.packs = [];
     $scope.employees = [];
 
+    //DELETE
+    //$scope.driversList = [];
+    //$scope.packList = [];
+
+    //sorting by status
     $scope.statusToSort = "";
-    $scope.listOfstatuses = ["not packed", "packed", "to be picked", "picked", "delivered" ];
-
+    $scope.listOfstatuses = ["", "not packed", "packed", "to be picked", "picked", "delivered" ];
+    //sorting by days
     $scope.dayToSort = "";
-    $scope.lostOfdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
+    $scope.lostOfdays = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    //sorting by driver
     $scope.driverToSort = "";
+    //sorting by pack
     $scope.packToSort = "";
 
-
+    //controll extra info 
     $scope.showextra = false;
     $scope.datailOrder = "";
 
+    connectToKallesServer.getPackages(function (data) {
+      $scope.packs = data;
+      console.log("real packages", $scope.packs );
+    });
+
+    connectToKallesServer.getOrders(function (data) {
+      $scope.orders = data;
+      
+    });
+
+    connectToKallesServer.getEmployees(function (data) {
+      $scope.employees = data;
+      $scope.employees.push({firstName: "no driver"});
+    });
+
+    connectToKallesServer.getCustomers(function (data) {
+      $scope.customers = data;
+    });
+
+    //sorting
+    $scope.sortByPack = function(packToSort){
+        /*$scope.packList = [];
+        angular.forEach($scope.orders, function(order){
+            if(order.pack.name === packToSort.name){
+                 $scope.packList.push(order);
+            }
+        });*/
+    }
+
+    $scope.sortByDriver = function(driverToSort){
+       /* $scope.driversList = [];
+        angular.forEach($scope.orders, function(order){
+            if(order.orderDriver.firstName === driverToSort.firstName){
+                $scope.driversList.push(order);
+            }
+        });*/
+    }
+
+    $scope.colorCodeNotPacked = function(order){
+        if(order.orderStatus === "not packed"){
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+    $scope.colorCodePacked = function(order){
+        if(order.orderStatus === "packed"){
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+    $scope.colorCodePicked = function(order){
+        if(order.orderStatus === "picked"){
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+    $scope.colorCodeDelivered = function(order){
+        if(order.orderStatus === "delivered"){
+          return true;
+        } else {
+          return false;
+        }
+    }
 
     $scope.resetSort = function(){
       $scope.statusToSort = "";
@@ -27,34 +104,20 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
       $scope.dayToSort = "";
     }
 
-    connectToKallesServer.getPackages(function (data) {
-      $scope.packs = data;
-      console.log("real packages", $scope.packs );
-    });
-
-    connectToKallesServer.getOrders(function (data) {
-        $scope.orders = data;
-    });
-
-    connectToKallesServer.getEmployees(function (data) {
-        $scope.employees = data;
-        $scope.employees.push({firstName: "no driver"});
-    });
-
-    connectToKallesServer.getCustomers(function (data) {
-      $scope.customers = data;
-    });
-
-     $scope.changedOrderStatus = function(changedValue, id, $index){ 
-        connectToKallesServer.putOrder({
-             orderStatus: changedValue
-        },id);
+    $scope.changedOrderStatus = function(changedValue, id, $index){ 
+      if(changedValue === "packed"){
+        $scope.orderPacked = true;
+      } else if(changedValue === "delivered"){
+          $scope.orderDelivered = true;
+      }
+      connectToKallesServer.putOrder({
+        orderStatus: changedValue
+      },id);
     };
 
-    $scope.changedDriver = function(changedValue, id, $index){ 
-        console.log(changedValue);
+    $scope.changedDriver = function(changedValue, id, $index){
         connectToKallesServer.putOrder({
-             orderDriver: {firstName: changedValue}
+          orderDriver: {firstName: changedValue}
         },id);
     };
 
@@ -67,7 +130,6 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
     $scope.showExtraInfo = function(id , $index){
       $scope.getOrder(id , $index);
       $scope.showextra = true;
-
     }
 
     $scope.hideDetails = function(){
@@ -75,17 +137,17 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
     }
 
 
-	$scope.orderAddress = "";
+	/*$scope.orderAddress = "";
 	$scope.orderPack = $scope.selectedPack || "no pack";
 	$scope.orderCustomer = "";
 	$scope.orderDays = [];
-	$scope.orderFirstsDeliveryDate = "";
+	$scope.orderFirstsDeliveryDate = "";*/
 
-	$scope.isActive = function(){
+	/*$scope.isActive = function(){
 		$scope.orderIsActive = true;
-	};
+	};*/
 
-	$scope.selectWeek = function(week){
+	/*$scope.selectWeek = function(week){
 		if(week == "even"){
 			$scope.orderWeeks = "even";
 		}
@@ -95,61 +157,10 @@ fruitkitControllers.controller('mainController', ['$scope', '$routeParams' ,'$lo
 		else{
 			$scope.orderWeeks = "odd";
 		}
-	};
+	};*/
 
-	$scope.addDay = function(day){
+	/*$scope.addDay = function(day){
 		$scope.orderDays.push(day);
-	};
-
-	$scope.toggle = function(){
-	  	$scope.showForm = !$scope.showForm;
-
-        $scope.orderAddress = "";
-		$scope.orderPack = $scope.selectedPack || "no pack";
-	 	$scope.orderDays = [];
-		$scope.orderFirstsDeliveryDate = "";
-		$scope.orderIsActive = true;
-		$scope.orderWeeks = "";
-     };
-	 
-    $scope.addOrder = function(){
-      $scope.order = {};
-      $scope.order.address = $scope.orderAddress  || "no address";
-      $scope.order.pack = $scope.orderPack  || "no pack";
-      $scope.order.isActive = $scope.orderIsActive || false;
-      $scope.order.weeks = $scope.orderWeeks ||  "no weeks";
-      $scope.order.days = $scope.orderDays ||  "no days";
-      $scope.order.firstDelivery = $scope.orderFirstsDeliveryDate  ||  "no first delivery";
-      $scope.order.customer = $scope.orderCustomer  ||  "no customer";
-
-      $scope.orders.push($scope.order);
-      connectToKallesServer.postOrders( $scope.order);
-      $scope.showForm = !$scope.showForm;
-    };
-
-    $scope.removeOrder = function(id, index){
-      console.log("deleted", id);
-      connectToKallesServer.deleteOrder(id);
-      $scope.orders.splice(index, 1);
-     };
-
-    $scope.sortByPack = function(packToSort){
-        $scope.packList = [];
-        angular.forEach($scope.orders, function(order){
-            if(order.pack.name === packToSort.name){
-                 $scope.packList.push(order);
-            }
-        });
-    }
-
-    $scope.sortByDriver = function(driverToSort){
-        $scope.driversList = [];
-        angular.forEach($scope.orders, function(order){
-            if(order.orderDriver.firstName === driverToSort.firstName){
-                $scope.driversList.push(order);
-            }
-        });
-    }
-     
-
+	};*/
+    
 }]);

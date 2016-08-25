@@ -109,6 +109,7 @@ fruitkitControllers.controller('ordersController',
   //record "uncheck event" to track which days were 
 
 	$scope.addDay = function(day){
+    //ToDO: write function to check if the same day has been added before
 		$scope.orderDays.push(day);
 	};
 	 
@@ -143,11 +144,11 @@ fruitkitControllers.controller('ordersController',
   $scope.sortBy = function(driverToSort){
     $scope.driversList = [];
     angular.forEach($scope.orders, function(order){
-            //$scope.order =  order;
-            if(order.orderDriver.firstName === driverToSort.firstName){
-                 $scope.driversList.push(order);
-            }
-        });
+        //$scope.order =  order;
+        if(order.orderDriver.firstName === driverToSort.firstName){
+             $scope.driversList.push(order);
+        }
+    });
   }
      
 

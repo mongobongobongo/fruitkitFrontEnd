@@ -22,6 +22,12 @@
     <script src="js/packageController.js"></script>
     <script src="js/employeesController.js"></script>
     <script src="js/singlePackageController.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+    <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+     <script src="node_modules/angular-google-maps/dist/angular-google-maps.min.js"></script>
     <script type="text/javascript">
     //console.log(window.location.hash);
        
@@ -31,7 +37,8 @@
   </head>
   <body>
   	<h1>Fruitkit</h1>
-  	<nav>
+    <div id="showMenu"></div>
+  	<nav id="main-menu">
   		<ul>
   			<li id="customers"><a href="#customers">Customers</a> </li>
         <li id="employees"><a href="#employees">Employees</a> </li>

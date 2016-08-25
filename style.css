@@ -2,6 +2,7 @@
 
 body{
 	font-family: 'Open Sans', sans-serif;
+	background-color: #e9eef5;
 }
 
 nav{
@@ -13,10 +14,6 @@ nav{
 }
 
 nav ul li{
-	display: inline-block;
-	margin-right: 20px;	
-	padding: 10px;
-	border: 1px solid ghostwhite;
 }
 
 nav ul li a{
@@ -24,7 +21,7 @@ nav ul li a{
 }
 
 ul li{
-	display: block;
+	
 }
 
 h1, h2{
@@ -35,30 +32,136 @@ table th, td{
 	width: 180px;
 	text-align: left;
 }
+/* main.html style */
 
-.mainPageList{
+.main-page{
+
+}
+
+.sort-by-section{
+	display: block;
+	border: 1px solid black;
+	width: 500px;
+	text-align: center;
+	padding: 15px;
+	margin-left: 45px;
+}
+.sort-by-section div{
+	display: inline-block;
+	text-align: left;
+}
+
+.main-page-list-item{
 	display: inline-block;
 	width: 23%;
-	margin-right: 5px;
+	margin-right: 20px;
 	margin-bottom: 20px;
 	list-style-type: none;
-	background-color: lightgrey;
+	background-color:#ffffff;
 	height: auto;
+	
+}
+.order-info{
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 15px;
 }
 
 .titleForCompany{
-	background-color: pink;
+	
 	display: block;
+	text-align: center;
+}
+
+.orderDetails{
 	border: 1px solid black;
+	display: block;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+.orderDays{
+	display: block;
+	font-size: 0.8em;
+}
+
+.wrapper{
+	position: fixed;
+	top: 0;
+	left:0;
+	right: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(	145, 212, 239, 0.7);
 }
 
 .extra-info{
 	position: fixed;
-	top: 30%;
-	background-color: pink;
+	top: 10px;
+	left: 25%;
+	right: 25%;
+	background-color: #e9eef5;
+	
+}
+
+.extra-info .info{
+	padding: 20px;
+}
+
+.delivery-info-title{
+	display: block;
+	background-color: black;
+	color: white;
+	text-align: center;
+	padding: 15px 0px;
+}
+
+.delivery-info-title button{
+	position: absolute;
+	right: 10px;
+	top: 0px;
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 2em;
 }
 
 .assignedDriver{
-	background-color: lightblue;
-	padding: 5px;
+	display: block;
+	font-size: 0.8em;
+}
+.orderStatus{
+	display: block;
+	font-size: 0.8em;
+}
+
+/* color coding for orders */
+
+/*
+
+#9caec7 - for todo
+#c8d229 - packed
+#7ac9b2 - delivered
+#ee3972 - away
+
+
+ */
+
+.yellowNotPacked{
+	background-color: #9caec7;
+	color: #ffffff;
+
+}
+
+.orangePacked{
+	background-color: #c8d229;
+	color: #ffffff;
+}
+.bluePicked{
+	background-color: blue;
+	color: #ffffff;
+}
+.redDelivered{
+	background-color: #7ac9b2;
+	color: #ffffff;
 }
