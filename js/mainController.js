@@ -34,7 +34,6 @@ fruitkitControllers.controller(
 
     connectToKallesServer.getOrders(function (data) {
       $scope.orders = data;
-      
     });
 
     connectToKallesServer.getEmployees(function (data) {
@@ -54,7 +53,7 @@ fruitkitControllers.controller(
                  $scope.packList.push(order);
             }
         });*/
-    }
+    };
 
     $scope.sortByDriver = function(driverToSort){
        /* $scope.driversList = [];
@@ -63,7 +62,7 @@ fruitkitControllers.controller(
                 $scope.driversList.push(order);
             }
         });*/
-    }
+    };
 
     $scope.colorCodeNotPacked = function(order){
         if(order.orderStatus === "not packed"){
@@ -71,7 +70,7 @@ fruitkitControllers.controller(
         } else {
           return false;
         }
-    }
+    };
 
     $scope.colorCodePacked = function(order){
         if(order.orderStatus === "packed"){
@@ -79,7 +78,7 @@ fruitkitControllers.controller(
         } else {
           return false;
         }
-    }
+    };
 
     $scope.colorCodePicked = function(order){
         if(order.orderStatus === "picked"){
@@ -87,7 +86,7 @@ fruitkitControllers.controller(
         } else {
           return false;
         }
-    }
+    };
 
     $scope.colorCodeDelivered = function(order){
         if(order.orderStatus === "delivered"){
@@ -95,14 +94,14 @@ fruitkitControllers.controller(
         } else {
           return false;
         }
-    }
+    };
 
     $scope.resetSort = function(){
       $scope.statusToSort = "";
       $scope.driverToSort = "";
       $scope.packToSort = "";
       $scope.dayToSort = "";
-    }
+    };
 
     $scope.changedOrderStatus = function(changedValue, id, $index){ 
       if(changedValue === "packed"){
@@ -130,11 +129,11 @@ fruitkitControllers.controller(
     $scope.showExtraInfo = function(id , $index){
       $scope.getOrder(id , $index);
       $scope.showextra = true;
-    }
+    };
 
     $scope.hideDetails = function(){
       $scope.showextra = false;
-    }
+    };
 
 
 	/*$scope.orderAddress = "";
