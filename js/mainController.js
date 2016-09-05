@@ -8,6 +8,17 @@ fruitkitControllers.controller(
     $scope.packs = [];
     $scope.employees = [];
 
+    //for maps
+    $scope.orderAddress = "";
+    $scope.mapCoordinates = "";
+    $scope.latitude = 0;
+    $scope.longitude = 0;
+    $scope.lat = 0;
+    $scope.lng = 0;
+    $scope.map = {};
+    
+
+
     //DELETE
     //$scope.driversList = [];
     //$scope.packList = [];
@@ -123,7 +134,9 @@ fruitkitControllers.controller(
     $scope.getOrder = function(id, index){
       connectToKallesServer.getOrder(function(data){
         $scope.datailOrder = data;
+        $scope.orderAddress =  $scope.datailOrder[0].address;
       },id);
+      decodeAddressIntoCoordinates($scope.orderAddress);
     };
 
     $scope.showExtraInfo = function(id , $index){
@@ -135,6 +148,43 @@ fruitkitControllers.controller(
       $scope.showextra = false;
     };
 
+
+    function decodeAddressIntoCoordinates(addressObj){
+      //example : http://maps.google.com/maps/api/geocode/json?address=Aleksanterinkatu+50,+00100,+Helsinki
+      // Simple GET request example:
+      $http({
+        method: 'GET',
+        url: 'http://maps.google.com/maps/api/geocode/json?address=' +'Aleksanterinkatu+50,+00100,+Helsinki'
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+         
+          console.log("this is maps", response.data.results[0].geometry.location);
+          $scope.mapCoordinates = response.data.results[0].geometry.location;
+          $scope.latitude = response.data.results[0].geometry.location.lat;
+          $scope.longitude = response.data.results[0].geometry.location.lng;
+          $scope.lat = parseFloat($scope.latitude).toFixed(3);
+          $scope.lng = parseFloat($scope.longitude).toFixed(3);
+          $scope.map = { 
+            center: { latitude: $scope.latitude, longitude:  $scope.longitude }, 
+            zoom: 8 
+          };
+
+          
+          
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+       
+          console.log("this is maps", $scope.latitude, $scope.longitude);
+    }
+    //decodeAddressIntoCoordinates();
+
+    
+    
+
+       
 
 	/*$scope.orderAddress = "";
 	$scope.orderPack = $scope.selectedPack || "no pack";

@@ -1,7 +1,9 @@
 <!-- main.html --> 
 <div class="main-page">
     <h2>Main Page</h2>
-
+    <div>
+        <add-order></add-order>
+    </div>
     <div class="sort-by-section">
         <span> <b>Sort By</b></span><br>
         <div>
@@ -53,7 +55,8 @@
                 <p><b>Type:</b> {{ datailOrder[0].customer.isCompany}} </p>
                 <p><b>Info:</b> {{ datailOrder[0].details}} </p>
                 <div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.8428452431867!2d24.940432815666686!3d60.16678048195964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bcbfd5a119b%3A0x3aae77498228fa91!2sReaktor+Ventures+Oy!5e0!3m2!1sen!2sfi!4v1471769266781" width="600" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.7282879855304!2d24.941365715666777!3d60.16867688196035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bcc160d2009%3A0x1ceecff7caf13d87!2sAleksanterinkatu+50%2C+00101+Helsinki!5e0!3m2!1sen!2sfi!4v1473000262081" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
                 </div>
             </div>
             

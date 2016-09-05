@@ -5,25 +5,6 @@ body{
 	background-color: #e9eef5;
 }
 
-nav{
-	font-size: 16px;
-	color: blue;
-	display: block;
-	width: 50%;
-	margin: 10px auto;
-}
-
-nav ul li{
-}
-
-nav ul li a{
-	text-decoration: none;
-}
-
-ul li{
-	
-}
-
 h1, h2{
 	text-align: center;
 }
@@ -33,10 +14,6 @@ table th, td{
 	text-align: left;
 }
 /* main.html style */
-
-.main-page{
-
-}
 
 .sort-by-section{
 	display: block;
@@ -135,6 +112,25 @@ table th, td{
 	font-size: 0.8em;
 }
 
+/* colors for menu */
+
+.fk-menu-item-xl{
+	background-color: #6a83a1;
+	color: white;
+}
+
+
+.fk-menu-item-xl:hover{
+	background-color: #28b2e6;
+	color: white;
+}
+
+.fk-menu-item-xl:active{
+	background-color: #28b2e6;
+	color: white;
+}
+
+
 /* color coding for orders */
 
 /*
@@ -146,6 +142,9 @@ table th, td{
 
 
  */
+
+
+ .angular-google-map-container { height: 400px; }
 
 .yellowNotPacked{
 	background-color: #9caec7;
@@ -164,4 +163,205 @@ table th, td{
 .redDelivered{
 	background-color: #7ac9b2;
 	color: #ffffff;
+}
+
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  	.fk-menu-item1-mb{
+  		background-color: #4c99cf;
+  	}
+
+  	.fk-menu-item2-mb{
+  		background-color: #4974a7;
+  	}
+
+  	.fk-menu-item3-mb{
+  		background-color: #5a5386;
+  	}
+
+  	.fk-menu-item4-mb{
+  		background-color: pink;
+  	}
+
+  	.fk-menu-item5-mb{
+  		background-color: #534367;
+  	}
+
+  	.fk-menu-item6-mb{
+  		background-color: pink;
+  	}
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  	.fk-menu-item1-mb{
+  		background-color: #4c99cf;
+  	}
+
+  	.fk-menu-item2-mb{
+  		background-color: #4974a7;
+  	}
+
+  	.fk-menu-item3-mb{
+  		background-color: #5a5386;
+  	}
+
+  	.fk-menu-item4-mb{
+  		background-color: pink;
+  	}
+
+  	.fk-menu-item5-mb{
+  		background-color: #534367;
+  	}
+
+  	.fk-menu-item6-mb{
+  		background-color: pink;
+  	}
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { .fk-menu-item1-mb{
+  		background-color: #4c99cf;
+  	}
+
+  	.fk-menu-item2-mb{
+  		background-color: #4974a7;
+  	}
+
+  	.fk-menu-item3-mb{
+  		background-color: #5a5386;
+  	}
+
+  	.fk-menu-item4-mb{
+  		background-color: pink;
+  	}
+
+  	.fk-menu-item5-mb{
+  		background-color: #534367;
+  	}
+
+  	.fk-menu-item6-mb{
+  		background-color: pink;
+  	}
+  	
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) { 
+
+}
+
+/* ----------- iPhone 6+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+  	.fk-menu-item1-mb{
+  		background-color: #4c99cf;
+  	}
+
+  	.fk-menu-item2-mb{
+  		background-color: #4974a7;
+  	}
+
+  	.fk-menu-item3-mb{
+  		background-color: #5a5386;
+  	}
+
+  	.fk-menu-item4-mb{
+  		background-color: pink;
+  	}
+
+  	.fk-menu-item5-mb{
+  		background-color: #534367;
+  	}
+
+  	.fk-menu-item6-mb{
+  		background-color: pink;
+  	}
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: landscape) { 
+
 }

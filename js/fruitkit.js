@@ -1,5 +1,5 @@
 'use strict';
-var fruitkit = angular.module('fruitkit', [ 'ngRoute', 'fruitkitControllers', 'fruitkitServices' ]);
+var fruitkit = angular.module('fruitkit', [ 'ngRoute', 'uiGmapgoogle-maps', 'fruitkitControllers', 'fruitkitServices', 'fruitkitDirectives' ]);
 
 fruitkit.config(['$routeProvider', '$locationProvider', 
 	function($routeProvider) {
