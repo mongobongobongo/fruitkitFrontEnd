@@ -1,0 +1,19 @@
+<div>
+    <button ng-click="toggle()">Add employee</button>
+</div>
+         <!-- add new employee -->
+         <div  ng-show="showForm">
+            <form ng-submit="addEmployee()">
+                <div>
+                    <p>Name:</p>
+                    <input type="text" ng-model="employeeName"  size="30" placeholder="name">
+                    <p>Surname:</p>
+                    <input type="text" ng-model="employeeSurname"  size="30" placeholder="name">
+                </div>
+                <div>
+                    <p>Phone:</p>
+                    <input type="text" ng-model="employeePhone"  size="70" placeholder="phone">  
+                </div>
+                <input class="button-add" type="submit" value="add">
+            </form>
+         </div>

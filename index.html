@@ -3,8 +3,9 @@
   <head>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.min.js"></script>
@@ -29,91 +30,76 @@
     <script src="js/packageController.js"></script>
     <script src="js/employeesController.js"></script>
     <script src="js/singlePackageController.js"></script>
+   
     <script src="js/angular-map.js"></script>
+
+    <script stc="js/addOrderDirective.js"></script>
 
     
   </head>
   <body>
-    <!-- menu -->
-    <nav class="navbar navbar-default">
+
+    <nav class="navbar navbar-inverse" ng-controller="switchRootDirectives">
       <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="#">Fruitkit</a>
         </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li class="dropdown fk-menu-item-xl fk-menu-item1-mb">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+               Customers
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a ng-click="addCustomer()">Add</a>
+              </li>
+              <li><a href="#customers">Customer list</a> </li>
+              <li><a href="#">Customer Reports</a> </li> 
+            </ul>
+          </li>
+          <li class="dropdown fk-menu-item-xl fk-menu-item2-mb">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+               Employees
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li> <a ng-click="addEmployee()">Add Employee </a></li>
+              <li><a href="#employees">Employees list</a> </li>
+              <li><a href="#">Reports</a> </li>
+            </ul>
+          </li> 
+          <li class="dropdown fk-menu-item-xl fk-menu-item3-mb">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              Fruitpacks
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li> <a ng-click="addFruitpack()">Add Fruitpack </a></li>
+              <li><a href="#fruitpacks">Fruitpack list</a> </li>
+              <li><a href="#">Reports</a> </li>
+            </ul>
+          </li> 
+          <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+              Orders
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a ng-click="addOrder()">Try</a>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-           <ul class="nav navbar-nav">
-             <li class="btn-group-vertical" role="group" aria-label="...">
-
-                        <div class="btn-group" role="group">
-                          <button type="button" class="btn btn-default dropdown-toggle fk-menu-item-xl fk-menu-item1-mb" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                             Customers
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                              <li>Add customer</li>
-                              <li><a href="#customers">Customer list</a> </li>
-                              <li><a href="#">Customer Reports</a> </li> 
-                          </ul>
-                        </div>
-
-                        <div class="btn-group" role="group">
-                          <button class="btn btn-default dropdown-toggle fk-menu-item-xl fk-menu-item2-mb" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Employees
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li>Add Employee</li>
-                            <li><a href="#employees">Employees list</a> </li>
-                            <li><a href="#">Reports</a> </li>
-                          </ul>
-                        </div>
-
-                        <div class="btn-group" role="group">
-                          <button class="btn btn-default dropdown-toggle fk-menu-item-xl fk-menu-item3-mb" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Fruitpacks
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                            <li>Add Fruitpack</li>
-                            <li><a href="#employees">Fruitpack list</a> </li>
-                            <li><a href="#">Reports</a> </li>
-                          </ul>
-                        </div>
-
-                        <div class="btn-group" role="group">
-                          <button class="btn btn-default dropdown-toggle fk-menu-item-xl fk-menu-item4-mb" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Orders
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
-                            <li>Add Order</li>
-                            <li><a href="#employees">Order list</a> </li>
-                            <li><a href="#">Reports</a> </li>
-                          </ul>
-                        </div>
-
-                        <button type="button" class="btn btn-default fk-menu-item-xl fk-menu-item5-mb">
-                          <a href="#today">Today</a>
-                        </button>
-                    </li>
-          </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+              </li>
+              <li><a href="#orders">Order list</a> </li>
+              <li><a href="#">Reports</a> </li>
+            </ul>
+          </li> 
+        </ul>
+      </div>
+      <!--Root directives -->
+      <div>
+        <add-order ng-if="addNewOrder"></add-order>
+        <add-customer ng-if="addNewCustomer"></add-customer>
+        <add-fruitpack ng-if="addNewFruitpack"></add-fruitpack>
+        <add-employee ng-if="addNewEmployee"></add-employee>
+      </div>
     </nav>
     
    
@@ -121,5 +107,10 @@
   		<!-- ng-controller="jsonParserController" -->
   		<div ng-view></div> 
   	</div>
+
+    <!-- Root dorectives -->
+    <div>
+
+    </div>
   </body>
 </html>

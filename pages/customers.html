@@ -1,38 +1,7 @@
 <!-- customers.html -->
     <div class=" text-center">
         <h2>Customers</h2>
-         <!-- add new customer -->
-         <div class="add">
-            <button ng-click="toggle()">Add customer</button>
-         </div>
-         <div class="addCustomerForm" ng-show="showForm">
-            <form ng-submit="addCustomer()">
-                <p>Name of a person in contact:</p>
-                <input type="text" ng-model="customerName"  size="30" placeholder="name">
-                <p>His/Her surname:</p>
-                <input type="text" ng-model="customerSurname"  size="30" placeholder="surname">
-                <p>Is it a company?</p>
-                <input type="checkbox" ng-checked="isCompanyChecked" ng-click="setIsCompany()" >
-                <p>if yes, what is the company name?</p>
-                <input type="text" ng-model="companyName"  size="30" placeholder="companyName">
-                <p>Company headquarters:</p>
-                <input name="namesInput" ng-model="companyHeadquarters" ng-list>
-                <p>{{ companyHeadquarters }}</p>
-                <p>City:</p>
-                <input type="text" ng-model="customerCity"  size="30" placeholder="city">
-                <p>Postcode:</p>
-                <input type="text" ng-model="customerPostcode"  size="30" placeholder="postcode">
-                <p>Address:</p>
-                <input type="text" ng-model="customerStreet"  size="30" placeholder="street">
-                <p>Email:</p>
-                <input type="text" ng-model="customerEmail"  size="30" placeholder="email">
-                <p>Phone:</p>
-                <input type="text" ng-model="customerPhone"  size="30" placeholder="phone">
-                <input type="submit" value="add" class="button-add">
-              </form>
-         </div>
-
-
+         
         <table>
             <thead>
               <tr>

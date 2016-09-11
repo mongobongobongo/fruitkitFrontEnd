@@ -1,6 +1,7 @@
-fruitkitControllers.controller('employeesController', ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
-    $scope.message = 'Every employee will be displayed here';
-    $scope.customers = [];
+fruitkitControllers.controller('employeesController', 
+  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
+  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+   
      
     connectToKallesServer.getEmployees(function (data) {
     	$scope.employees = data;

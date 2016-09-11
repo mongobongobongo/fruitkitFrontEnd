@@ -1,0 +1,18 @@
+<div>
+	<!-- add new order -->
+    <div>
+        <button ng-click="toggle()">Add package</button>
+    </div>
+    <div ng-show="showForm">
+     	<form ng-submit="addPackage()">
+     		<span>Fruitpack name:</span>
+	        <input type="text" ng-model="packName "  size="30" placeholder="name">
+	        <span>Weight, kg</span>
+	        <input type="text" ng-model="packWeight"  size="70" placeholder="weight, like 5 kg">
+	        <span>Fruits:</span>
+	        <input type="text" ng-model="packFruits"  size="70" placeholder="like ananas, lemons, oranges">
+	        
+	        <input class="button-add" type="submit" value="add">
+	     </form>
+    </div>
+</div>

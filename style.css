@@ -116,7 +116,12 @@ table th, td{
 
 .fk-menu-item-xl{
 	background-color: #6a83a1;
-	color: white;
+	color: white !important;
+}
+
+.fk-menu-item-xl>.dropdown-toggle{
+  background-color: #6a83a1;
+  color: white !important;
 }
 
 
@@ -173,27 +178,27 @@ table th, td{
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
-  	.fk-menu-item1-mb{
-  		background-color: #4c99cf;
+  	.fk-menu-item1-mb>.dropdown-toggle{
+  		background-color: #4c99cf !important;
   	}
 
-  	.fk-menu-item2-mb{
-  		background-color: #4974a7;
+  	.fk-menu-item2-mb>.dropdown-toggle{
+  		background-color: #4974a7 !important;
   	}
 
-  	.fk-menu-item3-mb{
-  		background-color: #5a5386;
+  	.fk-menu-item3-mb>.dropdown-toggle{
+  		background-color: #5a5386 !important;
   	}
 
-  	.fk-menu-item4-mb{
+  	.fk-menu-item4-mb>.dropdown-toggle{
   		background-color: pink;
   	}
 
-  	.fk-menu-item5-mb{
+  	.fk-menu-item5-mb>.dropdown-toggle{
   		background-color: #534367;
   	}
 
-  	.fk-menu-item6-mb{
+  	.fk-menu-item6-mb>.dropdown-toggle{
   		background-color: pink;
   	}
 }
