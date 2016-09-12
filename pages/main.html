@@ -1,10 +1,8 @@
 <!-- main.html --> 
-<div class="main-page">
+<div class="row main-page">
     <h2>Main Page</h2>
-    <!--<div>
-        <add-order></add-order>
-    </div>-->
-    <div class="sort-by-section">
+
+    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 sort-by-section">
         <span> <b>Sort By</b></span><br>
         <div>
             <label>Pack:</label><br>
@@ -25,9 +23,9 @@
         <button ng-click="resetSort()">Reset</button>
     </div>
 
-    <div class="main-list-of-orders">
-        <ul>
-            <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: '-orderStatus'" class="main-page-list-item" >
+    <div class="col-xs-12 main-list-of-orders">
+        <ul class="row">
+            <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: '-orderStatus'" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0 col-lg-3 col-lg-offset-0 main-page-list-item" >
                 <span class="titleForCompany" ng-class="{yellowNotPacked: colorCodeNotPacked(order), orangePacked: colorCodePacked(order), bluePicked: colorCodePicked(order), redDelivered: colorCodeDelivered(order)}">{{ order.customer.companyName || order.customer.name }} - {{ order.pack.name }}</span>
                 <div class="order-info">
                     <span class="orderDetails"> {{ order.details }}</span> 

@@ -16,12 +16,9 @@ table th, td{
 /* main.html style */
 
 .sort-by-section{
-	display: block;
 	border: 1px solid black;
-	width: 500px;
 	text-align: center;
 	padding: 15px;
-	margin-left: 45px;
 }
 .sort-by-section div{
 	display: inline-block;
@@ -29,12 +26,8 @@ table th, td{
 }
 
 .main-page-list-item{
-	display: inline-block;
-	width: 23%;
-	margin-right: 20px;
 	margin-bottom: 20px;
 	list-style-type: none;
-	background-color:#ffffff;
 	height: auto;
 	
 }
@@ -42,6 +35,8 @@ table th, td{
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-top: 15px;
+       background-color:#ffffff;
+
 }
 
 .titleForCompany{

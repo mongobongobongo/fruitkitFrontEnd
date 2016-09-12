@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html  ng-app="fruitkit">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
@@ -38,8 +39,8 @@
     
   </head>
   <body>
-
-    <nav class="navbar navbar-inverse" ng-controller="switchRootDirectives">
+   <div class="container-fluid">
+    <nav class="row navbar navbar-inverse" ng-controller="switchRootDirectives">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Fruitkit</a>
@@ -95,22 +96,20 @@
       </div>
       <!--Root directives -->
       <div>
+        <div class="wrapper" ng-if="addNewOrder">
+         <add-order></add-order>
+        </div>
         <add-order ng-if="addNewOrder"></add-order>
         <add-customer ng-if="addNewCustomer"></add-customer>
         <add-fruitpack ng-if="addNewFruitpack"></add-fruitpack>
-        <add-employee ng-if="addNewEmployee"></add-employee>
+Å        <add-employee ng-if="addNewEmployee"></add-employee>
       </div>
     </nav>
-    
    
-  	<div >
-  		<!-- ng-controller="jsonParserController" -->
-  		<div ng-view></div> 
-  	</div>
-
-    <!-- Root dorectives -->
-    <div>
-
+    <div >
+      <div ng-view></div> 
     </div>
+
+   </div>
   </body>
 </html>
