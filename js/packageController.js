@@ -1,10 +1,18 @@
 fruitkitControllers.controller('packageController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer',  
-  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer, connectToStagingServer ) {
     $scope.packs = [];
+
+    //old server
     connectToKallesServer.getPackages(function (data) {
       $scope.packs = data;
       console.log("real packages", $scope.packs );
+    });
+
+    // new server
+    //info from new servers
+    connectToStagingServer.getPackages(function (data) {
+      $scope.packs = data;
     });
 
     $scope.packName = "";

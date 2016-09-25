@@ -1,6 +1,6 @@
 fruitkitControllers.controller('ordersController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
-  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer) {
 
   //scope variables  
   $scope.orders = [];
@@ -9,10 +9,10 @@ fruitkitControllers.controller('ordersController',
   $scope.employees = [];
   $scope.driversList  = [];
 
- 
-  connectToKallesServer.getOrders(function (data) {
+  //old server  
+  /*connectToKallesServer.getOrders(function (data) {
     $scope.orders = data;
-  });
+  });*/
 
   connectToKallesServer.getPackages(function (data) {
     $scope.packs = data;
@@ -26,9 +26,33 @@ fruitkitControllers.controller('ordersController',
      $scope.employees = data;
   });
 
+  //new server
+  //info from new server
+
+    connectToStagingServer.getOrders(function (data) {
+      $scope.orders = data;
+    });
+
+    //info from new servers
+    connectToStagingServer.getPackages(function (data) {
+      $scope.packs = data;
+    });
+
+    connectToStagingServer.getCustomers(function (data) {
+      $scope.customers = data;
+    });
+
+    connectToStagingServer.getEmployees(function (data){
+      $scope.employees = data;
+    });
+
+
   $scope.removeOrder = function(id, index){
     console.log("deleted", id); 
+    //new server
+  //info from new server
     connectToKallesServer.deleteOrder(id);
+    connectToStagingServer.deleteOrder(id);
     $scope.orders.splice(index, 1);
   };
 

@@ -1,4 +1,6 @@
-fruitkitControllers.controller('singlePackageController', ['$scope', '$routeParams','$location', '$http', 'GetJson', 'connectToKallesServer', function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer) {
+fruitkitControllers.controller('singlePackageController', 
+  ['$scope', '$routeParams','$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer) {
 $scope.message = 'This is one package here';
       //push orders into array as we receive the json 
       $scope.thisPack = "";

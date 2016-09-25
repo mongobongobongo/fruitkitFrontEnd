@@ -1,5 +1,7 @@
 
-fruitkitControllers.controller('todayController', ['$scope', '$location', '$http', 'GetJson', 'weekdayToNumber', 'connectToKallesServer', function($scope, $location, $http, GetJson, weekdayToNumber, connectToKallesServer) {
+fruitkitControllers.controller('todayController', 
+  ['$scope', '$location', '$http', 'weekdayToNumber', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $location, $http, weekdayToNumber, connectToKallesServer, connectToStagingServer) {
     $scope.today = new Date();
     var orderList = this;
     $scope.driversList = [];

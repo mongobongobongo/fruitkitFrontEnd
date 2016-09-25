@@ -1,5 +1,7 @@
 
-fruitkitControllers.controller('weekController', ['$scope', '$location', '$http', 'GetJson', 'weekdayToNumber', 'connectToKallesServer', function($scope, $location, $http, GetJson, weekdayToNumber, connectToKallesServer) {
+fruitkitControllers.controller('weekController', 
+  ['$scope', '$location', '$http', 'weekdayToNumber', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $location, $http, weekdayToNumber, connectToKallesServer, connectToStagingServer) {
     $scope.message = 'Orders for today will be here!';
     $scope.today = new Date();
     var orderList = this;

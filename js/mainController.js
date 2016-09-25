@@ -1,7 +1,7 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
-  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer ) {
 
     //scope variables
     $scope.orders = [];
@@ -38,6 +38,7 @@ fruitkitControllers.controller(
     $scope.showextra = false;
     $scope.datailOrder = "";
 
+    //info from old server
     connectToKallesServer.getPackages(function (data) {
       $scope.packs = data;
       console.log("real packages", $scope.packs );
@@ -54,6 +55,26 @@ fruitkitControllers.controller(
 
     connectToKallesServer.getCustomers(function (data) {
       $scope.customers = data;
+    });
+
+
+    //info from new server
+
+    connectToStagingServer.getOrders(function (data) {
+      $scope.orders = data;
+    });
+
+    //info from new servers
+    connectToStagingServer.getPackages(function (data) {
+      $scope.packs = data;
+    });
+
+    connectToStagingServer.getCustomers(function (data) {
+      $scope.customers = data;
+    });
+
+    connectToStagingServer.getEmployees(function(data){
+      $scope.employees = data;
     });
 
     //sorting

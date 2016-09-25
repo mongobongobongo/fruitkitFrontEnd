@@ -2,7 +2,7 @@ fruitkitDirectives.directive('addOrder', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addOrder.html',
-			controller: function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ){
+			controller: function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer){
 									//scope variables  
 					  	$scope.orders = [];
 					  	$scope.packs = [];
@@ -30,6 +30,8 @@ fruitkitDirectives.directive('addOrder', function() {
 					  	$scope.orderContactPerson = "";
 					  	$scope.orderContactPersonTelephone = " ";
 
+              //connections to old Kalles server
+
 					    connectToKallesServer.getPackages(function (data) {
 					      $scope.packs = data;
 					  	});
@@ -41,6 +43,24 @@ fruitkitDirectives.directive('addOrder', function() {
 					  	connectToKallesServer.getEmployees(function(data){
 					     	$scope.employees = data;
 					  	});
+
+              //connection to new stg server 
+
+              connectToStagingServer.getCustomers(function (data) {
+                console.log("it works well", data);
+              });
+
+              connectToStagingServer.getPackages(function (data) {
+                $scope.packs = data;
+              });
+
+              connectToStagingServer.getCustomers(function (data) {
+                $scope.customers = data;
+              });
+
+              connectToStagingServer.getEmployees(function(data){
+                $scope.employees = data;
+              });
 
 						 function resetAddForm(){
 						    $scope.orderCustomer = "";

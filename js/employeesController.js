@@ -1,11 +1,18 @@
 fruitkitControllers.controller('employeesController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 
-  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer ) {
    
-     
+     //from old server
     connectToKallesServer.getEmployees(function (data) {
     	$scope.employees = data;
     });
+
+    //info from new servers
+
+    connectToStagingServer.getEmployees(function(data){
+      $scope.employees = data;
+    });
+
     $scope.employeeName = "";
     $scope.employeeSurname = "";
     $scope.employeePhone = "";
