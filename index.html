@@ -4,19 +4,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
 
-    <script src='/node_modules/lodash/lodash.min.js'></script>
+    <!--<script src='/node_modules/lodash/lodash.min.js'></script>
     <script src='/node_modules/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
     <script src='/node_modules/angular-google-maps/dist/angular-google-maps.js'></script>
-    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>-->
      
     <script src="js/fruitkit.js"></script>
     <script src="js/directives.js"></script>
@@ -32,14 +33,14 @@
     <script src="js/employeesController.js"></script>
     <script src="js/singlePackageController.js"></script>
    
-    <script src="js/angular-map.js"></script>
+   <!-- <script src="js/angular-map.js"></script>-->
 
     <script stc="js/addOrderDirective.js"></script>
 
     
   </head>
-  <body>
-   <div class="container-fluid">
+  <body ng-controller="AppCtrl">
+   <!--<div class="container-fluid">
     <nav class="row navbar navbar-inverse" ng-controller="switchRootDirectives">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -94,8 +95,9 @@
           </li> 
         </ul>
       </div>
+      -->
       <!--Root directives -->
-      <div>
+      <!--<div>
         <div class="wrapper" ng-if="addNewOrder">
          <add-order></add-order>
         </div>
@@ -110,6 +112,7 @@
       <div ng-view></div> 
     </div>
 
-   </div>
+   </div>-->
+   <ui-view></ui-view>
   </body>
 </html>
