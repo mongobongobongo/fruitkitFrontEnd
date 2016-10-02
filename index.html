@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
+    <script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
 
     <script src='/node_modules/lodash/lodash.min.js'></script>
     <script src='/node_modules/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
@@ -102,12 +103,13 @@
         <add-order ng-if="addNewOrder"></add-order>
         <add-customer ng-if="addNewCustomer"></add-customer>
         <add-fruitpack ng-if="addNewFruitpack"></add-fruitpack>
-Å        <add-employee ng-if="addNewEmployee"></add-employee>
+       <add-employee ng-if="addNewEmployee"></add-employee>
       </div>
     </nav>
    
     <div >
       <div ng-view></div> 
+      <div ui-view></div>
     </div>
 
    </div>

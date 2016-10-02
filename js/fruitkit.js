@@ -1,15 +1,16 @@
 'use strict';
-var fruitkit = angular.module('fruitkit', [ 'ngRoute', 'fruitkitControllers', 'fruitkitDirectiveSwitcher', 'fruitkitServices', 'fruitkitDirectives' ]);
+var fruitkit = angular.module('fruitkit', 
+[ 'ngRoute', 'ui.router', 'fruitkitControllers', 'fruitkitDirectiveSwitcher', 'fruitkitServices', 'fruitkitDirectives' ]);
 
-fruitkit.config(['$routeProvider', '$locationProvider', 
-	function($routeProvider) {
+
+fruitkit.config(['$routeProvider', '$locationProvider', 'USER_ROLES',
+	function($routeProvider, USER_ROLES) {
         $routeProvider
         //route for the customers page
             .when('/', {
                 templateUrl : '../pages/main.html',
                 //now we do not have to specify the ng-controller in the directive
-                controller  : 'mainController'//,
-                //controllerAs: 'customerList'
+                controller  : 'mainController'
             })
 
             .when('/customers', {
