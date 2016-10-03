@@ -161,7 +161,7 @@ fruitkit
 fruitkit
 .config(['$stateProvider', '$urlRouterProvider', 
     function($stateProvider, $urlRouterProvider) {
- 
+    $urlRouterProvider.otherwise('/');
   $stateProvider
   .state('outside', {
     url: '/outside',
