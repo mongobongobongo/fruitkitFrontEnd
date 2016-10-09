@@ -1,7 +1,7 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
-  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer ) {
+  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state'
+  function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
 
     //scope variables
     $scope.orders = [];
@@ -168,39 +168,6 @@ fruitkitControllers.controller(
     $scope.hideDetails = function(){
       $scope.showextra = false;
     };
-
-
-    function decodeAddressIntoCoordinates(addressObj){
-      //example : http://maps.google.com/maps/api/geocode/json?address=Aleksanterinkatu+50,+00100,+Helsinki
-      // Simple GET request example:
-      $http({
-        method: 'GET',
-        url: 'http://maps.google.com/maps/api/geocode/json?address=' +'Aleksanterinkatu+50,+00100,+Helsinki'
-      }).then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-         
-          console.log("this is maps", response.data.results[0].geometry.location);
-          $scope.mapCoordinates = response.data.results[0].geometry.location;
-          $scope.latitude = response.data.results[0].geometry.location.lat;
-          $scope.longitude = response.data.results[0].geometry.location.lng;
-          $scope.lat = parseFloat($scope.latitude).toFixed(3);
-          $scope.lng = parseFloat($scope.longitude).toFixed(3);
-          $scope.map = { 
-            center: { latitude: $scope.latitude, longitude:  $scope.longitude }, 
-            zoom: 8 
-          };
-
-          
-          
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-        });
-       
-          console.log("this is maps", $scope.latitude, $scope.longitude);
-    }
-    //decodeAddressIntoCoordinates();
 
     
     

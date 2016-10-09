@@ -13,16 +13,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js"></script>
     <script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 
+    <!-- 
     <script src='/node_modules/lodash/lodash.min.js'></script>
     <script src='/node_modules/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
     <script src='/node_modules/angular-google-maps/dist/angular-google-maps.js'></script>
     <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
-     
+    --> 
     <script src="js/fruitkit.js"></script>
+     <script src="js/controllers.js"></script>
+     <!--
     <script src="js/directives.js"></script>
     <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
+   
     <script src="js/mainController.js"></script>
     <script src="js/customersController.js"></script>
     <script src="js/ordersController.js"></script>
@@ -31,17 +35,18 @@
     <script src="js/singleOrderController.js"></script>
     <script src="js/packageController.js"></script>
     <script src="js/employeesController.js"></script>
-    <script src="js/singlePackageController.js"></script>
+    <script src="js/singlePackageController.js"></script>-->
    
-    <script src="js/angular-map.js"></script>
+    <!--<script src="js/angular-map.js"></script>-->
 
-    <script stc="js/addOrderDirective.js"></script>
+    <!--<script stc="js/addOrderDirective.js"></script>-->
 
     
   </head>
-  <body>
-   <div class="container-fluid">
-    <nav class="row navbar navbar-inverse" ng-controller="switchRootDirectives">
+  <body ng-controller="AppCtrl">
+    <ui-view></ui-view>
+   <!--<div class="container-fluid" >-->
+    <!--<nav class="row navbar navbar-inverse" ng-controller="switchRootDirectives">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Fruitkit</a>
@@ -95,7 +100,6 @@
           </li> 
         </ul>
       </div>
-      <!--Root directives -->
       <div>
         <div class="" ng-if="addNewOrder">
          <add-order></add-order>
@@ -105,13 +109,15 @@
         <add-fruitpack ng-if="addNewFruitpack"></add-fruitpack>
        <add-employee ng-if="addNewEmployee"></add-employee>
       </div>
-    </nav>
+    </nav>-->
    
-    <div >
+    <!--<div>
       <div ng-view></div> 
       <div ui-view></div>
-    </div>
+    </div>-->
+   
+   <!--</div>-->
 
-   </div>
+    
   </body>
 </html>
