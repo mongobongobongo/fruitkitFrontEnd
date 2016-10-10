@@ -1,6 +1,6 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state'
+  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
   function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
 
     //scope variables

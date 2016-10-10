@@ -1,7 +1,6 @@
 'use strict';
 var fruitkit = angular.module('fruitkit', 
-[ 'ngRoute', 'ui.router', 'fruitkitControllers'
-//, 'fruitkitDirectiveSwitcher', 'fruitkitServices', 'fruitkitDirectives' 
+[ 'ngRoute', 'ui.router', 'fruitkitControllers', 'fruitkitServices', 'fruitkitDirectiveSwitcher','fruitkitDirectives' 
 ]);
 
 
@@ -182,7 +181,7 @@ fruitkit
     templateUrl: '../templates/inside.html',
     controller: 'InsideCtrl'
   })
-  .state('mainPage', {
+  .state('inside.mainPage', {
     url: '/main',
     templateUrl: '../pages/main.html',
     controller: 'mainController'
@@ -211,8 +210,8 @@ fruitkit
  
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
-      //$state.go('inside');
-      $state.go('mainPage');
+      $state.go('inside');
+      //$state.go('mainPage');
     }, function(errMsg) {
       console.log("no good");
     });
@@ -255,3 +254,24 @@ fruitkit
     $state.go('outside.login');
   });
 });
+
+fruitkit.controller('switchRootDirectives', 
+  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer',
+  function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer){
+    $scope.addOrder  = function(){
+      $scope.addNewOrder = !$scope.addNewOrder;
+    };
+
+    $scope.addEmployee = function(){
+      $scope.addNewEmployee = !$scope.addNewEmployee;
+    };
+     
+    $scope.addCustomer = function(){
+      $scope.addNewCustomer = !$scope.addNewCustomer;
+    };
+
+    $scope.addFruitpack = function(){
+      $scope.addNewFruitpack = !$scope.addNewFruitpack;
+    };
+
+}]);

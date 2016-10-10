@@ -6,8 +6,8 @@ var fruitkitControllers = angular.module('fruitkitControllers', []);
 var fruitkitDirectiveSwitcher = angular.module('fruitkitDirectiveSwitcher', []);
 
 fruitkitDirectiveSwitcher.controller('switchRootDirectives', 
-	['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
-	function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer){
+	['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer',
+	function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer){
 		$scope.addOrder  = function(){
 			$scope.addNewOrder = !$scope.addNewOrder;
 		};
