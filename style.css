@@ -13,6 +13,38 @@ table th, td{
 	width: 180px;
 	text-align: left;
 }
+
+
+
+/*registration*/
+
+.register{
+  width: 600px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: grey;
+  margin: 100px auto;
+  display: block; 
+}
+
+/*.register>h2{
+  text-align: center;
+}
+
+
+.register>label, button, input{
+  display: block;
+  margin: 10px auto;
+  width: 50%;
+}*/
+
+
+.add-directive{
+  border-radius: 10px;
+  background-color: grey;
+ 
+  
+}
 /* main.html style */
 
 .sort-by-section{

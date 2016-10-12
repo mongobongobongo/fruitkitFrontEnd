@@ -1,90 +1,105 @@
-<div class="container-fluid" >
-  <nav class="row navbar navbar-inverse" ng-controller="switchRootDirectives">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Fruitkit</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li class="dropdown fk-menu-item-xl fk-menu-item1-mb">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-               Customers
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a ng-click="addCustomer()">Add</a>
-              </li>
-              <li><a href="#customers">Customer list</a> </li>
-              <li><a href="#">Customer Reports</a> </li> 
-            </ul>
-          </li>
-          <li class="dropdown fk-menu-item-xl fk-menu-item2-mb">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-               Employees
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li> <a ng-click="addEmployee()">Add Employee </a></li>
-              <li><a href="#employees">Employees list</a> </li>
-              <li><a href="#">Reports</a> </li>
-            </ul>
-          </li> 
-          <li class="dropdown fk-menu-item-xl fk-menu-item3-mb">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              Fruitpacks
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li> <a ng-click="addFruitpack()">Add Fruitpack </a></li>
-              <li><a href="#fruitpacks">Fruitpack list</a> </li>
-              <li><a href="#">Reports</a> </li>
-            </ul>
-          </li> 
-          <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              Orders
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li>
-                <a ng-click="addOrder()">Try</a>
-
-              </li>
-              <li><a href="#orders">Order list</a> </li>
-              <li><a href="#">Reports</a> </li>
-            </ul>
-          </li> 
-        </ul>
+<div class="container-fluid" ng-controller="switchRootDirectives">
+  <nav class="row navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Fruitkit</a>
       </div>
-      <div>
-        <div class="" ng-if="addNewOrder">
-         <add-order></add-order>
-        </div>
-        <add-order ng-if="addNewOrder"></add-order>
-        <add-customer ng-if="addNewCustomer"></add-customer>
-        <add-fruitpack ng-if="addNewFruitpack"></add-fruitpack>
-       <add-employee ng-if="addNewEmployee"></add-employee>
-      </div>
-    </nav>
-</div>
 
-<div>
-  <div>
-    <h1 class="title">Member area</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="logout()">Logout</button>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a ui-sref=".mainPage" class="btn btn-primary">Home</a>
+        </li>
+        <li class="dropdown fk-menu-item-xl fk-menu-item1-mb">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+             Customers
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-click="addCustomer()">Add</a>
+            </li>
+            <li><a ui-sref=".customerList">Customer List</a> </li>
+            <li><a href="#">Customer Reports</a> </li> 
+          </ul>
+        </li>
+        <li class="dropdown fk-menu-item-xl fk-menu-item2-mb">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+             Employees
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li> <a ng-click="addEmployee()">Add Employee </a></li>
+            <li><a ui-sref=".employeesList" class="btn btn-primary">Home</a></li>
+            <li><a href="#">Reports</a> </li>
+          </ul>
+        </li> 
+        <li class="dropdown fk-menu-item-xl fk-menu-item3-mb">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            Fruitpacks
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li> <a ng-click="addFruitpack()">Add Fruitpack </a></li>
+            <li><a ui-sref=".packsList">Fruitpacks List</a> </li>
+            <li><a href="#">Reports</a> </li>
+          </ul>
+        </li> 
+        <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            Orders
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a ng-click="addOrder()">Try</a>
+
+            </li>
+            <li><a ui-sref=".orderList" >Order List</a> </li>
+            <li><a href="#">Reports</a> </li>
+          </ul>
+        </li> 
+        <li  class="dropdown fk-menu-item-xl fk-menu-item4-mb">
+          <button class="button button-clear" ng-click="logout()">Logout</button>
+        </li>
+        <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
+           <button class="button button-full button-balanced" ng-click="getInfo()">
+            Get Memberinfo
+          </button>
+        </li> 
+        <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
+          <button class="button button-full button-assertive" ng-click="destroySession()">
+            Destroy token
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--adding new items -->
+  <div class="container-fluid">
+    <!-- add new order -->
+    <div class="row" ng-if="addNewOrder">
+      <add-order class="col-lg-8 col-lg-offset-2 add-directive"></add-order>
+    </div>
+    <!-- add new customer -->
+    <div class="row" ng-if="addNewCustomer">
+      <add-customer class="col-lg-8 col-lg-offset-2 add-directive"></add-customer>
+    </div>
+    <!-- add new fruitpack -->
+    <div  class="row" ng-if="addNewFruitpack">
+      <add-fruitpack class="col-lg-8 col-lg-offset-2 add-directive"></add-fruitpack>
+    </div>
+    <!-- add new employee -->
+    <div class="row" ng-if="addNewEmployee">
+      <add-employee class="col-lg-8 col-lg-offset-2 add-directive"></add-employee>
     </div>
   </div>
-  <div>
+</div>
+
+
+<div>
+    <h1 class="title">Member area</h1>
     <div class="card">
       <div class="item item-text-wrap">
         {{memberinfo}}
       </div>
     </div>
-    <button class="button button-full button-assertive" ng-click="destroySession()">
-      Destroy token
-    </button>
-    <button class="button button-full button-balanced" ng-click="getInfo()">
-      Get Memberinfo
-    </button>
-  </div>
 </div>
 
 <div ui-view></div>

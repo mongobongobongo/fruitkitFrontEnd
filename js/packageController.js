@@ -1,13 +1,13 @@
 fruitkitControllers.controller('packageController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'GetJson', 'connectToKallesServer', 'connectToStagingServer',
-  function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer, connectToStagingServer ) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
+  function($scope, $routeParams, $location, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state) {
     $scope.packs = [];
 
     //old server
-    connectToKallesServer.getPackages(function (data) {
+    /*connectToKallesServer.getPackages(function (data) {
       $scope.packs = data;
       console.log("real packages", $scope.packs );
-    });
+    });*/
 
     // new server
     //info from new servers
@@ -33,7 +33,7 @@ fruitkitControllers.controller('packageController',
 
     $scope.removePackage = function(id, index){
       console.log("deleted", id);
-      connectToKallesServer.deletePackage(id);
+      connectToStagingServer.deletePackage(id);
       $scope.packs.splice(index, 1);
      };
    

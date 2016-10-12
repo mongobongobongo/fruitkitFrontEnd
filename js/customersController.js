@@ -1,32 +1,25 @@
 // create the controller and inject Angular's $scope
-fruitkitControllers.controller('customersController', ['$scope', '$location', '$http', '$rootScope', 'connectToKallesServer', 'connectToStagingServer',
-  function($scope, $location, $http, $rootScope, connectToKallesServer, connectToStagingServer)  {
+fruitkitControllers.controller('customersController', 
+  ['$scope', '$location', '$http', '$rootScope', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
+  function($scope, $location, $http, $rootScope, connectToStagingServer, AuthService, API_ENDPOINT, $state)  {
     //scope variables
     $scope.customers = [];
-
-    //get all customers list
-    connectToKallesServer.getCustomers(function (data) {
-      $scope.customers = data;
-      console.log("real customers", $scope.customers );
-    });
 
     //get customers list from new server 
     connectToStagingServer.getCustomers(function (data) {
       $scope.customers = data;
-      console.log("real customers", $scope.customers );
     });
-
 
     $scope.removeCustomer = function(id, index){
       console.log("deleted", id);
-      connectToKallesServer.deleteCustomers(id);
+      connectToStagingServer.deleteCustomers(id);
       $scope.customers.splice(index, 1);
     };
 
 
      $scope.toggle = function(){
         $scope.showForm = !$scope.showForm;
-
+        
         $scope.customerName = "";
         $scope.customerSurname = "";
 

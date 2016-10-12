@@ -3,7 +3,7 @@ fruitkitDirectives.directive('addOrder', function() {
 			restrict: 'E',
 			templateUrl: '../templates/addOrder.html',
 			controller: function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer){
-									//scope variables  
+							//scope variables  
 					  	$scope.orders = [];
 					  	$scope.packs = [];
 					  	$scope.customers = [];
@@ -146,7 +146,7 @@ fruitkitDirectives.directive('addOrder', function() {
 					    $scope.order.telephone = $scope.telephone || " ";
 					    $scope.orders.push($scope.order);
 					    connectToKallesServer.postOrders( $scope.order);
-					    $scope.showForm = !$scope.showForm;
+					    $scope.showForm = false;
 					    resetAddForm();
 					  };
 

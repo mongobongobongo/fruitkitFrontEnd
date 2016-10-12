@@ -1,7 +1,7 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
+  ['$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
+  function($scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
 
     //scope variables
     $scope.orders = [];
@@ -16,12 +16,6 @@ fruitkitControllers.controller(
     $scope.lat = 0;
     $scope.lng = 0;
     $scope.map = {};
-    
-
-
-    //DELETE
-    //$scope.driversList = [];
-    //$scope.packList = [];
 
     //sorting by status
     $scope.statusToSort = "";
@@ -39,7 +33,7 @@ fruitkitControllers.controller(
     $scope.datailOrder = "";
 
     //info from old server
-    connectToKallesServer.getPackages(function (data) {
+    /*connectToKallesServer.getPackages(function (data) {
       $scope.packs = data;
       console.log("real packages", $scope.packs );
     });
@@ -57,7 +51,7 @@ fruitkitControllers.controller(
       $scope.customers = data;
     });
 
-
+  */
     //info from new server
 
     connectToStagingServer.getOrders(function (data) {
@@ -141,19 +135,31 @@ fruitkitControllers.controller(
       } else if(changedValue === "delivered"){
           $scope.orderDelivered = true;
       }
-      connectToKallesServer.putOrder({
+      /*connectToKallesServer.putOrder({
+        orderStatus: changedValue
+      },id);*/
+      connectToStagingServer.putOrder({
         orderStatus: changedValue
       },id);
     };
 
     $scope.changedDriver = function(changedValue, id, $index){
-        connectToKallesServer.putOrder({
+        /*connectToKallesServer.putOrder({
+          orderDriver: {firstName: changedValue}
+        },id);
+        */
+        connectToStagingServer.putOrder({
           orderDriver: {firstName: changedValue}
         },id);
     };
 
     $scope.getOrder = function(id, index){
-      connectToKallesServer.getOrder(function(data){
+     /* connectToKallesServer.getOrder(function(data){
+        $scope.datailOrder = data;
+        $scope.orderAddress =  $scope.datailOrder[0].address;
+      },id);*/
+
+      connectToStagingServer.getOrder(function(data){
         $scope.datailOrder = data;
         $scope.orderAddress =  $scope.datailOrder[0].address;
       },id);

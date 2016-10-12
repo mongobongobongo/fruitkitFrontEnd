@@ -185,6 +185,26 @@ fruitkit
     url: '/main',
     templateUrl: '../pages/main.html',
     controller: 'mainController'
+  })
+  .state('inside.orderList', {
+    url: '/orders',
+    templateUrl: '../pages/orders.html',
+    controller: 'ordersController'
+  })
+  .state('inside.customerList', {
+    url: '/customers',
+    templateUrl: '../pages/customers.html',
+    controller: 'customersController'
+  })
+  .state('inside.packsList', {
+    url: '/packs',
+    templateUrl: '../pages/packages.html',
+    controller: 'packageController'
+  })
+  .state('inside.employeesList', {
+    url: '/employees',
+    templateUrl: '../pages/employees.html',
+    controller: 'employeesController'
   });
  
   $urlRouterProvider.otherwise('/outside/login');
@@ -256,8 +276,8 @@ fruitkit
 });
 
 fruitkit.controller('switchRootDirectives', 
-  ['$scope', '$routeParams' , '$http', 'connectToKallesServer', 'connectToStagingServer',
-  function($scope, $routeParams, $http, connectToKallesServer, connectToStagingServer){
+  ['$scope', '$routeParams' , '$http', 'connectToStagingServer',
+  function($scope, $routeParams, $http, connectToStagingServer){
     $scope.addOrder  = function(){
       $scope.addNewOrder = !$scope.addNewOrder;
     };

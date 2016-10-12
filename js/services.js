@@ -24,21 +24,6 @@ fruitkitServices.service('weekdayToNumber', function(){
 	};
 });*/
 
-/*fruitkitServices.service('createOrderItem', function(){
-	this.createOrderItem = function(order){
-  		var orderItem = {};
-		orderItem.orderId = order.orderId;
-		orderItem.pack = order.orderPack.packname;
-		orderItem.isActive = order.isActive;
-		orderItem.weeks = order.weeks;
-		orderItem.daysInWeek = order.daysInWeek;
-		orderItem.firstDeliveryDate = order.firstDeliveryDate;
-		orderItem.customer = order.orderCustomer.name;
-		orderItem.address = order.orderCustomer.address;
-		//$scope.newOrderList.push(orderItem);
-  	};
-});*/
-
 fruitkitServices.service('connectToKallesServer', ['$http', function($http){
 	this.getCustomers = function(callback){
 		$http
@@ -179,7 +164,7 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
   var stagingServer = 'http://37.139.24.103';
   var stagingServer = 'http://localhost';
   var stagingPort = ':3000';
-  //var stagingPort = ':3001';
+  var stagingPort = ':3001';
 
   this.getCustomers = function(callback){
     $http

@@ -1,20 +1,20 @@
 'use strict';
 var fruitkitDirectives = angular.module('fruitkitDirectives', []);
 
-
 fruitkitDirectives.directive('addOrder', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addOrder.html',
-			controller: function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer ){
-									//scope variables  
+			controller: function($scope, $routeParams, $location, $http, connectToStagingServer ){
+							//scope variables  
+              $scope.showForm = true;
 					  	$scope.orders = [];
 					  	$scope.packs = [];
 					  	$scope.customers = [];
 					  	$scope.employees = [];
 					  	$scope.driversList  = [];
 
-					  //info
+					   //info
 					  	$scope.orderCustomer = "";
 					  	$scope.orderHeadquarter = "";
 
@@ -35,7 +35,7 @@ fruitkitDirectives.directive('addOrder', function() {
 					  	$scope.orderContactPersonTelephone = " ";
 
               //get info from old Kalles server
-
+              /*
 					    connectToKallesServer.getPackages(function (data) {
 					      $scope.packs = data;
 					  	});
@@ -47,7 +47,9 @@ fruitkitDirectives.directive('addOrder', function() {
 					  	connectToKallesServer.getEmployees(function(data){
 					     	$scope.employees = data;
 					  	});
+              */
 
+              
 
               //info from new servers
               connectToStagingServer.getPackages(function (data) {
@@ -81,9 +83,7 @@ fruitkitDirectives.directive('addOrder', function() {
 						    $scope.dayChecked = false;
 						 }
 
-					  	$scope.toggle = function(){
-					    	$scope.showForm = !$scope.showForm;
-					  	};
+					  	
 
 					 	$scope.addPack = function(orderPack){
 					    	$scope.orderPacks.push(orderPack);
@@ -123,9 +123,15 @@ fruitkitDirectives.directive('addOrder', function() {
   					//record "uncheck event" to track which days were 
 
 					$scope.addDay = function(day){
+              $scope.dayChecked = false;
+              var day = day;
     					//ToDO: write function to check if the same day has been added before
-    
-						$scope.orderDays.push(day);
+              function findDay(element) { 
+                return element === day;
+              }
+              if(!$scope.orderDays.find(findDay)){
+                $scope.orderDays.push(day);
+              }
 					};
 	 
 					  $scope.addOrder = function(){
@@ -145,10 +151,10 @@ fruitkitDirectives.directive('addOrder', function() {
 					    $scope.order.details = $scope.orderDetails || " ";
 					    $scope.order.telephone = $scope.telephone || " ";
 					    $scope.orders.push($scope.order);
-					    connectToKallesServer.postOrders( $scope.order);
+					    //connectToKallesServer.postOrders( $scope.order);
               connectToStagingServer.postOrders( $scope.order);
               console.log("cool");
-					    $scope.showForm = !$scope.showForm;
+					    $scope.showForm = false;
 					    resetAddForm();
 					  };
 
@@ -161,8 +167,9 @@ fruitkitDirectives.directive('addCustomer', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addCustomer.html',
-			controller: function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ){
+			controller: function($scope, $routeParams, $location, $http,  connectToStagingServer ){
 						    //info about new cistomer
+                $scope.showForm = true;
 					    $scope.customerName = "";
 					    $scope.customerSurname = "";
 
@@ -179,10 +186,12 @@ fruitkitDirectives.directive('addCustomer', function() {
 					    $scope.customerPhone = "";
 
 					    //get all customers list
-					    connectToKallesServer.getCustomers(function (data) {
+            
+					    connectToStagingServer.getCustomers(function (data) {
 					      $scope.customers = data;
 					      console.log("real customers", $scope.customers );
 					    });
+
 
 					    //TODO: fix checkbox
 					    $scope.setIsCompany = function(){
@@ -206,27 +215,28 @@ fruitkitDirectives.directive('addCustomer', function() {
 					      $scope.customer.phone = $scope.customerPhone ||  "no phone";
 
 					      $scope.customers.push($scope.customer);
-					      connectToKallesServer.postCustomers($scope.customer);
+					      //connectToKallesServer.postCustomers($scope.customer);
+                connectToStagingServer.postCustomers($scope.customer);
 
-					      $scope.showForm = !$scope.showForm;
+					      resetAddForm();
 					    };
 
-					$scope.toggle = function(){
-				        $scope.showForm = !$scope.showForm;
+               function resetAddForm(){
+                $scope.showForm = !$scope.showForm;
 
-				        $scope.customerName = "";
-				        $scope.customerSurname = "";
+                $scope.customerName = "";
+                $scope.customerSurname = "";
 
-				        $scope.isCompany = false;
-				        $scope.companyName = "";
-				        $scope.isCompanyChecked = false;
+                $scope.isCompany = false;
+                $scope.companyName = "";
+                $scope.isCompanyChecked = false;
 
-				        $scope.customerCity = "";
-				        $scope.customerPostcode = "";
-				        $scope.customerStreet = "";
-				        $scope.customerEmail = "";
-				        $scope.customerPhone = "";
-				     };
+                $scope.customerCity = "";
+                $scope.customerPostcode = "";
+                $scope.customerStreet = "";
+                $scope.customerEmail = "";
+                $scope.customerPhone = "";
+             }
 			}
 		} 
 });
@@ -235,29 +245,29 @@ fruitkitDirectives.directive('addFruitpack', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addFruitpack.html',
-			controller: function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ){
+			controller: function($scope, $routeParams, $location, $http, connectToStagingServer  ){
 					$scope.packs = [];
+          $scope.showForm = true;
 					$scope.packName = "";
-				   	$scope.packWeight = "";
-				   	$scope.packFruits = "";
-			     	$scope.price = "";
+				  $scope.packWeight = "";
+				  $scope.packFruits = "";
+			    $scope.price = "";
 			    
 			    $scope.addPackage = function(){
 			    	$scope.pack = {};
-			      	$scope.pack.name = $scope.packName || "no name";
-			      	$scope.pack.weight = $scope.packWeight  || "no weight";
-			      	$scope.pack.fruits = $scope.packFruits || "no fruits";
-			       
-			      	$scope.packs.push($scope.pack);
-			      	connectToKallesServer.postPackages($scope.pack);
-			      	$scope.showForm = !$scope.showForm;
+			      $scope.pack.name = $scope.packName || "no name";
+			      $scope.pack.weight = $scope.packWeight  || "no weight";
+			      $scope.pack.fruits = $scope.packFruits || "no fruits";
+			      $scope.packs.push($scope.pack);
+			      connectToStagingServer.postPackages($scope.pack);
+            $scope.reset();
 			    };
 
-			    $scope.toggle = function(){
-			        $scope.showForm = !$scope.showForm;
-			        $scope.packName = "";
-					$scope.packWeight = "";
-					$scope.packFruits = "";
+			    $scope.reset= function(){
+			       $scope.packName = "";
+					   $scope.packWeight = "";
+					   $scope.packFruits = "";
+             $scope.showForm = false;
 			     };
 			}
 		} 
@@ -268,8 +278,9 @@ fruitkitDirectives.directive('addEmployee', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addEmployee.html',
-			controller: function($scope, $routeParams, $location, $http, GetJson, connectToKallesServer ){
-					
+			controller: function($scope, $routeParams, $location, $http, connectToStagingServer ){
+					$scope.employees = [];
+          $scope.showForm = true;
 			    $scope.employeeName = "";
 			    $scope.employeeSurname = "";
 			    $scope.employeePhone = "";
@@ -279,12 +290,8 @@ fruitkitDirectives.directive('addEmployee', function() {
 			      $scope.employee.surname = $scope.employeeSurname || "no surname";
 			      $scope.employee.employeePhone = $scope.employeePhone || "no phone";
 			      $scope.employees.push($scope.employee);
-			      connectToKallesServer.postEmployees( $scope.employee);
-			      $scope.showForm = !$scope.showForm;
-			    };
-
-			     $scope.toggle = function(){
-			      $scope.showForm = !$scope.showForm;
+			      connectToStagingServer.postEmployees( $scope.employee);
+			      $scope.showForm = false;
 			    };
 			}
 		} 

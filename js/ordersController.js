@@ -1,30 +1,14 @@
 fruitkitControllers.controller('ordersController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'connectToKallesServer', 'connectToStagingServer',
-  function($scope, $routeParams, $location, $http, connectToKallesServer, connectToStagingServer) {
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
+  function($scope, $routeParams, $location, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state) {
 
+  $scope.addOrderFromPanel = false;
   //scope variables  
   $scope.orders = [];
   $scope.packs = [];
   $scope.customers = [];
   $scope.employees = [];
   $scope.driversList  = [];
-
-  //old server  
-  /*connectToKallesServer.getOrders(function (data) {
-    $scope.orders = data;
-  });*/
-
-  connectToKallesServer.getPackages(function (data) {
-    $scope.packs = data;
-  });
-
-  connectToKallesServer.getCustomers(function (data) {
-    $scope.customers = data;
-  });
-
-  connectToKallesServer.getEmployees(function(data){
-     $scope.employees = data;
-  });
 
   //new server
   //info from new server

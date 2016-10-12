@@ -2,7 +2,10 @@
     <div class="">
         <h1>Order list Page</h1>
 
-         <add-order></add-order>
+        <div ng-show="addOrderFromPanel">
+           <add-order></add-order>
+        </div>
+        
          <div>
               <hr/>
                 <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort" ng-change="sortBy(driverToSort)"></select>
