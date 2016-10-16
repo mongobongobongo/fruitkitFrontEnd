@@ -67,7 +67,7 @@ fruitkit
   notAuthenticated: 'auth-not-authenticated'
 })
 .constant('API_ENDPOINT', {
-  url: 'http://localhost:3001/api'
+  url: 'http://37.139.24.103:3000/api'
 });
 
 fruitkit

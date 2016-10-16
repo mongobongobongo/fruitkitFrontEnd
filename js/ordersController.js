@@ -35,7 +35,7 @@ fruitkitControllers.controller('ordersController',
     console.log("deleted", id); 
     //new server
   //info from new server
-    connectToKallesServer.deleteOrder(id);
+//    connectToKallesServer.deleteOrder(id);
     connectToStagingServer.deleteOrder(id);
     $scope.orders.splice(index, 1);
   };

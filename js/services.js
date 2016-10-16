@@ -11,7 +11,6 @@ fruitkitServices.service('weekdayToNumber', function(){
     	if(day == 'Saturday'){ return 6;}
     	if(day == 'Sunday'){ return 0;}
 	};
-		
 });
 
 //get number of the week
@@ -162,9 +161,7 @@ fruitkitServices.service('connectToKallesServer', ['$http', function($http){
 
 fruitkitServices.service('connectToStagingServer', ['$http', function($http){
   var stagingServer = 'http://37.139.24.103';
-  var stagingServer = 'http://localhost';
   var stagingPort = ':3000';
-  var stagingPort = ':3001';
 
   this.getCustomers = function(callback){
     $http

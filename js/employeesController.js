@@ -28,7 +28,8 @@ fruitkitControllers.controller('employeesController',
    	 
    	$scope.remove = function(id, index){
    	 	//console.log("deleted", id);
-   	 	connectToKallesServer.deleteEmployees(id);
+   	 	//connectToKallesServer.deleteEmployees(id);
+connectToStagingServer.deleteEmployees(id);
    	 	$scope.employees.splice(index, 1);
    	 };
 
