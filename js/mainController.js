@@ -1,12 +1,13 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
+  ['$rootScope', '$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
+  function($rootScope, $scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
 
     //scope variables
     $scope.orders = [];
     $scope.packs = [];
     $scope.employees = [];
+    
 
     //for maps
     $scope.orderAddress = "";
@@ -53,7 +54,7 @@ fruitkitControllers.controller(
 
   */
     //info from new server
-
+    
     connectToStagingServer.getOrders(function (data) {
       $scope.orders = data;
     });

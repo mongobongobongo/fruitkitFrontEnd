@@ -1,7 +1,8 @@
 'use strict';
 var fruitkitDirectives = angular.module('fruitkitDirectives', []);
 
-fruitkitDirectives.directive('addOrder', function() {
+
+/*fruitkitDirectives.directive('addOrder', function() {
 	return {
 			restrict: 'E',
 			templateUrl: '../templates/addOrder.html',
@@ -35,19 +36,7 @@ fruitkitDirectives.directive('addOrder', function() {
 					  	$scope.orderContactPersonTelephone = " ";
 
               //get info from old Kalles server
-              /*
-					    connectToKallesServer.getPackages(function (data) {
-					      $scope.packs = data;
-					  	});
-
-					  	connectToKallesServer.getCustomers(function (data) {
-					    	$scope.customers = data;
-					  	});
-
-					  	connectToKallesServer.getEmployees(function(data){
-					     	$scope.employees = data;
-					  	});
-              */
+              
 
               
 
@@ -160,7 +149,7 @@ fruitkitDirectives.directive('addOrder', function() {
 
 			}
 		} 
-});
+});*/
 
 
 fruitkitDirectives.directive('addCustomer', function() {

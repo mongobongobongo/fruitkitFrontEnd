@@ -1,57 +1,68 @@
-<div class="container-fluid" ng-controller="switchRootDirectives">
+<!-- addItemsController -->
+<div class="container-fluid" ng-controller="addItemsController">
   <nav class="row navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Fruitkit</a>
+        <a class="navbar-brand" ui-sref=".mainPage">Fruitkit</a>
       </div>
-
       <ul class="nav navbar-nav">
-        <li class="active">
+        <li>
           <a ui-sref=".mainPage" class="btn btn-primary">Home</a>
         </li>
         <li class="dropdown fk-menu-item-xl fk-menu-item1-mb">
           <a class="dropdown-toggle" data-toggle="dropdown">
-             Customers
-          <span class="caret"></span></a>
+            Customers
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li>
               <a ng-click="addCustomer()">Add</a>
             </li>
-            <li><a ui-sref=".customerList">Customer List</a> </li>
-            <li><a href="#">Customer Reports</a> </li> 
+            <li>
+              <a ui-sref=".customerList">Customer List</a> 
+            </li>
           </ul>
         </li>
         <li class="dropdown fk-menu-item-xl fk-menu-item2-mb">
           <a class="dropdown-toggle" data-toggle="dropdown">
              Employees
-          <span class="caret"></span></a>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li> <a ng-click="addEmployee()">Add Employee </a></li>
-            <li><a ui-sref=".employeesList" class="btn btn-primary">Home</a></li>
-            <li><a href="#">Reports</a> </li>
+            <li>
+              <a ng-click="addEmployee()">Add Employee</a>
+            </li>
+            <li>
+              <a ui-sref=".employeesList" class="btn btn-primary">Employee List</a>
+            </li>
           </ul>
         </li> 
         <li class="dropdown fk-menu-item-xl fk-menu-item3-mb">
           <a class="dropdown-toggle" data-toggle="dropdown">
             Fruitpacks
-          <span class="caret"></span></a>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
-            <li> <a ng-click="addFruitpack()">Add Fruitpack </a></li>
-            <li><a ui-sref=".packsList">Fruitpacks List</a> </li>
-            <li><a href="#">Reports</a> </li>
+            <li> 
+              <a ng-click="addFruitpack()">Add Fruitpack </a>
+            </li>
+            <li>
+              <a ui-sref=".packsList">Fruitpacks List</a> 
+            </li>
           </ul>
         </li> 
         <li class="dropdown fk-menu-item-xl fk-menu-item4-mb">
           <a class="dropdown-toggle" data-toggle="dropdown">
             Orders
-          <span class="caret"></span></a>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu">
             <li>
-              <a ng-click="addOrder()">Try</a>
-
+              <a ng-click="addOrder()">Add Order</a>
             </li>
-            <li><a ui-sref=".orderList" >Order List</a> </li>
-            <li><a href="#">Reports</a> </li>
+            <li>
+              <a ui-sref=".orderList" >Order List</a> 
+            </li>
           </ul>
         </li> 
         <li  class="dropdown fk-menu-item-xl fk-menu-item4-mb">
@@ -92,14 +103,9 @@
   </div>
 </div>
 
-
+<!-- end of the addItemsController-->
 <div>
-    <h1 class="title">Member area</h1>
-    <div class="card">
-      <div class="item item-text-wrap">
-        {{memberinfo}}
-      </div>
-    </div>
+  <h1>Welcome!</h1>
 </div>
 
 <div ui-view></div>
