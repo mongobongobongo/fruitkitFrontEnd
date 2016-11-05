@@ -157,15 +157,14 @@ fruitkitDirectives.directive('addCustomer', function() {
 			restrict: 'E',
 			templateUrl: '../templates/addCustomer.html',
 			controller: function($scope, $routeParams, $location, $http,  connectToStagingServer ){
-						    //info about new cistomer
-                $scope.showForm = true;
+						  //info about new customer
+              $scope.showForm = true;
 					    $scope.customerName = "";
 					    $scope.customerSurname = "";
 
 					    //if the client is a company
 					    $scope.isCompany = false;
 					    $scope.companyName = "";
-					    $scope.companyHeadquarters = [];
 
 					    //contact details
 					    $scope.customerStreet = "";
@@ -176,10 +175,10 @@ fruitkitDirectives.directive('addCustomer', function() {
 
 					    //get all customers list
             
-					    connectToStagingServer.getCustomers(function (data) {
+					    /*connectToStagingServer.getCustomers(function (data) {
 					      $scope.customers = data;
 					      console.log("real customers", $scope.customers );
-					    });
+					    });*/
 
 
 					    //TODO: fix checkbox
@@ -195,7 +194,7 @@ fruitkitDirectives.directive('addCustomer', function() {
 					      $scope.customer.isCompany = $scope.isCompany;
 					      $scope.customer.company = {};
 					      $scope.customer.company.name = $scope.companyName  || "no name";
-					      $scope.customer.company.headquarters = $scope.companyHeadquarters;
+					      //$scope.customer.company.headquarters = $scope.companyHeadquarters;
 
 					      $scope.customer.street = $scope.customerStreet || "no street address";
 					      $scope.customer.city = $scope.customerCity || "no city";
@@ -235,7 +234,7 @@ fruitkitDirectives.directive('addFruitpack', function() {
 			restrict: 'E',
 			templateUrl: '../templates/addFruitpack.html',
 			controller: function($scope, $routeParams, $location, $http, connectToStagingServer  ){
-					$scope.packs = [];
+					//$scope.packs = [];
           $scope.showForm = true;
 					$scope.packName = "";
 				  $scope.packWeight = "";
@@ -268,7 +267,7 @@ fruitkitDirectives.directive('addEmployee', function() {
 			restrict: 'E',
 			templateUrl: '../templates/addEmployee.html',
 			controller: function($scope, $routeParams, $location, $http, connectToStagingServer ){
-					$scope.employees = [];
+					//$scope.employees = [];
           $scope.showForm = true;
 			    $scope.employeeName = "";
 			    $scope.employeeSurname = "";
@@ -277,7 +276,7 @@ fruitkitDirectives.directive('addEmployee', function() {
 			      $scope.employee = {};
 			      $scope.employee.firstName = $scope.employeeName || "no name";
 			      $scope.employee.surname = $scope.employeeSurname || "no surname";
-			      $scope.employee.employeePhone = $scope.employeePhone || "no phone";
+			      $scope.employee.phone = $scope.employeePhone || "no phone";
 			      $scope.employees.push($scope.employee);
 			      connectToStagingServer.postEmployees( $scope.employee);
 			      $scope.showForm = false;

@@ -29,7 +29,7 @@ fruitkit
     });
   };
 })
-.controller('InsideCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
+.controller('InsideCtrl', function($rootScope, $scope, AuthService, API_ENDPOINT, $http, $state, connectToStagingServer) {
   $scope.destroySession = function() {
     AuthService.logout();
   };
@@ -44,6 +44,24 @@ fruitkit
     AuthService.logout();
     $state.go('outside.login');
   };
+
+  //info from new server
+  connectToStagingServer.getOrders(function (data) {
+    $scope.orders = data;
+  });
+
+  connectToStagingServer.getPackages(function (data) {
+    $scope.packs = data;
+  });
+
+  connectToStagingServer.getCustomers(function (data) {
+    $scope.customers = data;
+  });
+
+  connectToStagingServer.getEmployees(function (data) {
+    $scope.employees = data;
+  });
+
 })
 .controller('AppCtrl', function($rootScope, $scope, $state, AuthService, AUTH_EVENTS, connectToStagingServer) {
   $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {

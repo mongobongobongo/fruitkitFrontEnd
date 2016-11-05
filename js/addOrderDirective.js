@@ -4,10 +4,10 @@ fruitkitDirectives.directive('addOrder', function() {
     templateUrl: '../templates/addOrder.html',
     controller: function($rootScope, $scope, $http, connectToStagingServer ){
       //global variables
-      $scope.orders = [];
-      $scope.packs = [];
-      $scope.customers = [];
-      $scope.employees = [];
+      //$scope.orders = [];
+      //$scope.packs = [];
+      //$scope.customers = [];
+      //$scope.employees = [];
 
       //scope variables  
       $scope.showForm = true;
@@ -29,7 +29,7 @@ fruitkitDirectives.directive('addOrder', function() {
       $scope.orderContactPersonTelephone = " ";
               
       //info from new servers
-      connectToStagingServer.getPackages(function (data) {
+      /*connectToStagingServer.getPackages(function (data) {
         $rootScope.packs = data;
       });
 
@@ -39,7 +39,7 @@ fruitkitDirectives.directive('addOrder', function() {
 
       connectToStagingServer.getEmployees(function(data){
         $rootScope.employees = data;
-      });
+      });*/
 
       function resetAddForm(){
         $scope.orderCustomer = "";
@@ -94,14 +94,14 @@ fruitkitDirectives.directive('addOrder', function() {
       //record "uncheck event" to track which days were 
 
       $scope.addDay = function(day){
-          $scope.dayChecked = false;
-          var day = day;
-          function findDay(element) { 
-            return element === day;
-          }
-          if(!$scope.orderDays.find(findDay)){
-            $scope.orderDays.push(day);
-          }
+        $scope.dayChecked = false;
+        var day = day;
+        function findDay(element) { 
+          return element === day;
+        }
+        if(!$scope.orderDays.find(findDay)){
+          $scope.orderDays.push(day);
+        }
       };
    
       $scope.addOrder = function(){

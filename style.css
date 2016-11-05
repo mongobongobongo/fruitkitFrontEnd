@@ -397,3 +397,10 @@ table th, td{
   and (orientation: landscape) { 
 
 }
+
+.edit-item{
+  position: fixed;
+  top:20px;
+  left: 100px;
+  background-color: grey;
+}

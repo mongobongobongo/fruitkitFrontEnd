@@ -13,6 +13,12 @@ fruitkitServices.service('weekdayToNumber', function(){
 	};
 });
 
+fruitkitServices.service('cloneObj', function(){
+  this.clone = function(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+});
+
 //get number of the week
 /*fruitkitServices.service('getWeekNumber', function(){
 	this.getWeekNumber = function() {
@@ -23,6 +29,7 @@ fruitkitServices.service('weekdayToNumber', function(){
 	};
 });*/
 
+/*
 fruitkitServices.service('connectToKallesServer', ['$http', function($http){
 	this.getCustomers = function(callback){
 		$http
@@ -156,12 +163,22 @@ fruitkitServices.service('connectToKallesServer', ['$http', function($http){
             });
 	};
 }]);
-
+*/
 // service to connect to stg server
 
 fruitkitServices.service('connectToStagingServer', ['$http', function($http){
   var stagingServer = 'http://37.139.24.103';
   var stagingPort = ':3000';
+
+  //customers
+  this.getCustomer = function(callback, id){
+    $http
+    .get(stagingServer + stagingPort + '/customers/' + id)
+    .success(function(data){
+      console.log(data);                        
+      callback(data);
+    });
+  };
 
   this.getCustomers = function(callback){
     $http
@@ -185,10 +202,15 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
   this.deleteCustomers = function(id){
 
       $http
-      .delete(stagingServer + stagingPort+'/customers/' + id)
+      .delete(stagingServer + stagingPort + '/customers/' + id)
             .success(function(){
                 console.log("deleted successfully");
             });
+  };
+
+  this.putCustomers = function(payload, id){
+    return $http
+      .put(stagingServer + stagingPort + '/customers/' + id, JSON.stringify(payload));
   };
 
   this.getOrder = function(callback, id){
@@ -266,6 +288,11 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
             });
   };
 
+  this.putPackage = function(payload, id){
+    return  $http
+    .put(stagingServer + stagingPort+'/packages/' + id, JSON.stringify(payload));
+  };
+
   this.getEmployees = function(callback){
     $http
     .get(stagingServer + stagingPort+'/employees')
@@ -293,5 +320,10 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
             .success(function(){
                 console.log("deleted successfully");
             });
+  };
+
+  this.putEmployee = function(payload, id){
+    return  $http
+    .put(stagingServer + stagingPort+'/employees/' + id, JSON.stringify(payload));
   };
 }]);

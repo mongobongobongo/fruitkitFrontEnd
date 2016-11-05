@@ -1,31 +1,30 @@
 fruitkitControllers.controller('ordersController', 
-  ['$rootScope', '$scope', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($rootScope, $scope, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state) {
+  ['$rootScope', '$scope', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'cloneObj',
+  function($rootScope, $scope, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state, cloneObj) {
+  
+  $scope.orderToEdit = {};
 
-  $scope.orders = [];
-  $scope.packs = [];
-  $scope.customers = [];
-  $scope.employees = [];
+  $scope.edit = function(order){
+    $scope.orderToEdit = cloneObj.clone(order);
+    $scope.currentOrder= order;
+    $scope.editing = true;
+  };
 
-  //info from new server
+  $scope.editOrder = function(changedValue, id){
+    var data = {};
 
-  connectToStagingServer.getOrders(function (data) {
-    $scope.orders = data;
-  });
+    data.name = changedValue.name || null;
+    data.weight = changedValue.weight || null;
+    data.fruits = changedValue.fruits || null;
+    data.price = changedValue.price|| null;
 
-  connectToStagingServer.getPackages(function (data) {
-    $scope.packs = data;
-  });
-
-  connectToStagingServer.getCustomers(function (data) {
-    $scope.customers = data;
-  });
-
-  connectToStagingServer.getEmployees(function (data){
-    $scope.employees = data;
-  });
-
-  //check if working correctly
+    connectToStagingServer.putPackage(data, id)
+      .success(function () {
+        Object.assign($scope.currentPack, changedValue);
+        $scope.currentPack = null;
+        $scope.editing = false;
+      });
+  }
   $scope.removeOrder = function(id, index){
     connectToStagingServer.deleteOrder(id);
     $scope.orders.splice(index, 1);

@@ -1,14 +1,14 @@
-// create the controller and inject Angular's $scope
 fruitkitControllers.controller('customersController', 
-  ['$scope', '$location', '$http', '$rootScope', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($scope, $location, $http, $rootScope, connectToStagingServer, AuthService, API_ENDPOINT, $state)  {
-    //scope variables
-    $scope.customers = [];
+  ['$scope', '$location', '$http', '$rootScope', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'cloneObj',
+  function($scope, $location, $http, $rootScope, connectToStagingServer, AuthService, API_ENDPOINT, $state, cloneObj)  {
 
-    //get customers list from new server 
-    connectToStagingServer.getCustomers(function (data) {
-      $scope.customers = data;
-    });
+    $scope.customerToEdit = {};
+
+    $scope.edit = function(customer){
+      $scope.customerToEdit = cloneObj.clone(customer);
+      $scope.currentCustomer = customer;
+      $scope.editing = true;
+    };
 
     $scope.removeCustomer = function(id, index){
       console.log("deleted", id);
@@ -16,6 +16,26 @@ fruitkitControllers.controller('customersController',
       $scope.customers.splice(index, 1);
     };
 
+    $scope.editCustomer = function(changedValue, id){
+      var data = {};
+
+      data.name = changedValue.name || null;
+      data.surname = changedValue.surname || null;
+      data.company = {};
+      data.company.name = changedValue.company.name || null;
+      data.street = changedValue.street || null;
+      data.city = changedValue.city || null;
+      data.postcode = changedValue.postcode || null;
+      data.email = changedValue.email || null;
+      data.phone = changedValue.phone || null;
+
+      connectToStagingServer.putCustomers(data, id)
+        .success(function () {
+          Object.assign($scope.currentCustomer, changedValue);
+          $scope.currentCustomer = null;
+          $scope.editing = false;
+        });
+    }
 
      $scope.toggle = function(){
         $scope.showForm = !$scope.showForm;

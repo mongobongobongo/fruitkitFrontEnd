@@ -1,14 +1,13 @@
 fruitkitControllers.controller(
   'mainController', 
   ['$rootScope', '$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($rootScope, $scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
+  function ($rootScope, $scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
 
     //scope variables
-    $scope.orders = [];
+    //$scope.orders = [];
     $scope.packs = [];
     $scope.employees = [];
     
-
     //for maps
     $scope.orderAddress = "";
     $scope.mapCoordinates = "";
@@ -55,12 +54,12 @@ fruitkitControllers.controller(
   */
     //info from new server
     
-    connectToStagingServer.getOrders(function (data) {
+    /*connectToStagingServer.getOrders(function (data) {
       $scope.orders = data;
-    });
+    });*/
 
     //info from new servers
-    connectToStagingServer.getPackages(function (data) {
+    /*.getPackages(function (data) {
       $scope.packs = data;
     });
 
@@ -71,7 +70,7 @@ fruitkitControllers.controller(
     connectToStagingServer.getEmployees(function(data){
       $scope.employees = data;
     });
-
+  */
     //sorting
     $scope.sortByPack = function(packToSort){
         /*$scope.packList = [];
@@ -164,11 +163,11 @@ fruitkitControllers.controller(
         $scope.datailOrder = data;
         $scope.orderAddress =  $scope.datailOrder[0].address;
       },id);
-      decodeAddressIntoCoordinates($scope.orderAddress);
+      //decodeAddressIntoCoordinates($scope.orderAddress);
     };
 
-    $scope.showExtraInfo = function(id , $index){
-      $scope.getOrder(id , $index);
+    $scope.showExtraInfo = function(id , index){
+      $scope.getOrder(id , index);
       $scope.showextra = true;
     };
 

@@ -3,63 +3,67 @@
   <h2>Main Page</h2>
 
   <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 sort-by-section">
-    <span> <b>Sort By</b></span><br>
-       <div>
-            <label>Pack:</label><br>
-            <select ng-options="pack.name for pack in packs" ng-model="packToSort"></select>
-        </div>
-        <div>
-            <label>Drivers:</label><br>
-            <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort"></select>
-        </div>
-        <div>
-            <label>Days:</label><br>
-            <select ng-options="day for day in lostOfdays" ng-model="dayToSort"></select>
-        </div>
-        <div>
-            <label>Status:</label><br>
-            <select ng-options="status for status in listOfstatuses " ng-model="statusToSort" ></select>
-        </div>  
-        <button ng-click="resetSort()">Reset</button>
+    <span><b>Sort By</b></span><br>
+    <div>
+      <label>Pack:</label><br>
+      <select ng-options="pack.name for pack in packs" ng-model="packToSort"></select>
+    </div>
+    <div>
+      <label>Drivers:</label><br>
+      <select ng-options="employee.firstName for employee in employees" ng-model="driverToSort"></select>
+    </div>
+    <div>
+      <label>Days:</label><br>
+      <select ng-options="day for day in lostOfdays" ng-model="dayToSort"></select>
+    </div>
+    <div>
+      <label>Status:</label><br>
+      <select ng-options="status for status in listOfstatuses " ng-model="statusToSort" ></select>
+    </div>  
+    <button ng-click="resetSort()">Reset</button>
   </div>
+
+  <!--
+<li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: '-orderStatus'" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0 col-lg-3 col-lg-offset-0 main-page-list-item" >
+        <span class="titleForCompany" ng-class="{yellowNotPacked: colorCodeNotPacked(order), orangePacked: colorCodePacked(order), bluePicked: colorCodePicked(order), redDelivered: colorCodeDelivered(order)}">
+-->
 
   <div class="col-xs-12 main-list-of-orders">
     <ul class="row">
-      <li ng-repeat="order in orders | filter: {orderStatus: statusToSort, orderDriver:{firstName: driverToSort.firstName}, days: dayToSort, pack: {name: packToSort.name}} | orderBy: '-orderStatus'" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0 col-lg-3 col-lg-offset-0 main-page-list-item" >
-        <span class="titleForCompany" ng-class="{yellowNotPacked: colorCodeNotPacked(order), orangePacked: colorCodePacked(order), bluePicked: colorCodePicked(order), redDelivered: colorCodeDelivered(order)}">
+      <li  class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-4 col-md-offset-0 col-lg-3 col-lg-offset-0 main-page-list-item" ng-repeat="order in orders">
+        <span class="titleForCompany" >
           {{ order.customer.companyName || order.customer.name }} - {{ order.pack.name }}
         </span>
         <div class="order-info">
-                    <span class="orderDetails"> {{ order.details }}</span> 
-                    <span class="orderDays"><b>Days:</b> {{ order.days.toString() }}</span>
-                    <span class="assignedDriver">
-                        <b>Driver:</b> {{order.orderDriver.firstName}}
-                        <span> <select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></span>
-                    </span> 
-                    <span class="orderStatus">
-                        <b>Status:</b> {{ order.orderStatus}}
-                         <span><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></span>
-                    </span>
+            <span class="orderDetails"> {{ order.details }}</span> 
+            <span class="orderDays"><b>Days:</b> {{ order.days.toString() }}</span>
+            <span class="assignedDriver">
+                <b>Driver:</b> {{order.orderDriver.firstName}}
+                <span> <select ng-options="employee.firstName for employee in employees" ng-model="order.orderDriver" ng-change="changedDriver(order.orderDriver.firstName, order._id, $index)"></select></span>
+            </span> 
+            <span class="orderStatus">
+                <b>Status:</b> {{ order.orderStatus}}
+                 <span><select ng-options="status for status in order.statusList" ng-model="order.orderStatus" ng-change="changedOrderStatus(order.orderStatus, order._id, $index)" ></select></span>
+            </span>
         </div>
         <button class="btn" ng-click="showExtraInfo(order._id, $index)">More</button>
       </li>
     </ul>
   </div>
   <div class="wrapper" ng-show="showextra">
-        <div class="extra-info" >
-            <span class="delivery-info-title">Delivery Info <button ng-click="hideDetails()">x</button></span>
-            <div class="info">
-                <p><b>Client:</b> {{ datailOrder[0].customer.name }}</p>
-                <p><b>Address:</b> {{ datailOrder[0].address }}</p>
-                <p><b>Contact: </b>{{ datailOrder[0].address }}  {{ datailOrder[0].customer.city}}  {{ datailOrder[0].customer.postcode }} {{ datailOrder[0].customer.street}} </p>
-                <p><b>Type:</b> {{ datailOrder[0].customer.isCompany}} </p>
-                <p><b>Info:</b> {{ datailOrder[0].details}} </p>
-                <div>
-                    <!--<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>-->
-                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.7282879855304!2d24.941365715666777!3d60.16867688196035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bcc160d2009%3A0x1ceecff7caf13d87!2sAleksanterinkatu+50%2C+00101+Helsinki!5e0!3m2!1sen!2sfi!4v1473000262081" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
-                </div>
-            </div>
-            
+    <div class="extra-info" >
+      <span class="delivery-info-title">Delivery Info <button ng-click="hideDetails()">x</button></span>
+        <div class="info">
+          <p><b>Client:</b> {{ datailOrder[0].customer.name }}</p>
+          <p><b>Address:</b> {{ datailOrder[0].address }}</p>
+          <p><b>Contact: </b>{{ datailOrder[0].address }}  {{ datailOrder[0].customer.city}}  {{ datailOrder[0].customer.postcode }} {{ datailOrder[0].customer.street}} </p>
+          <p><b>Type:</b> {{ datailOrder[0].customer.isCompany}} </p>
+          <p><b>Info:</b> {{ datailOrder[0].details}} </p>
+          <div>
+                <!--<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>-->
+                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1984.7282879855304!2d24.941365715666777!3d60.16867688196035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920bcc160d2009%3A0x1ceecff7caf13d87!2sAleksanterinkatu+50%2C+00101+Helsinki!5e0!3m2!1sen!2sfi!4v1473000262081" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+          </div>
         </div>
+    </div>
   </div>      
 </div>

@@ -1,32 +1,56 @@
 <!-- customers.html -->
-    <div class=" text-center">
-        <h2>Customers</h2>
-         
-        <table>
-            <thead>
-              <tr>
-                 <th>ID</th>
-                 <th>Name</th>
-                 <th>Address</th>
-                 <th>Email</th>
-                 <th>Phone</th>
-                 <th>is Company</th>
-                 <th>Company Name</th>
-                 <th> </th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="customer in customers">
-                    <td>{{$index + 1}}</td>
-                    <td>{{ customer.name }} {{ customer.surname }}</td> 
-                    <td>{{ customer.street }} {{ customer.city }} {{ customer.postcode }}</td>
-                    <td>{{ customer.email }}</td>
-                    <td>{{ customer.phone }}</td>
-                    <td>{{ customer.isCompany }} </td>
-                    <td>{{ customer.companyName }}</td>
-                    <td> <button class="btn" ng-click="removeCustomer(customer._id, $index)">x</button> </td>  
-                </tr>
-            </tbody>      
-        </table>
+<div class="text-center">
+  <h2>Customers</h2>
+  <table>
+    <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Address</th>
+         <th>Email</th>
+         <th>Phone</th>
+         <th>is Company</th>
+         <th>Company Name</th>
+         <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="customer in customers track by $index">
+        <td>{{$index + 1}}</td> 
+        <td>{{ customer.name }} {{ customer.surname }}</td> x§
+        <td>{{ customer.street }} {{ customer.city }} {{ customer.postcode }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.isCompany }} </td>
+        <td>{{ customer.company.name }}</td>
+        <td> 
+          <button class="btn" ng-click="removeCustomer(customer._id, $index)">x</button> 
+        </td>
+        <td> 
+          <button class="btn" ng-click="edit(customer)">Edit</button> 
+        </td>  
+      </tr>
+    </tbody>      
+  </table>
 
-    </div>
+  <form ng-show="editing" ng-submit="editCustomer(customerToEdit, customerToEdit._id)" class="edit-item">
+    <p>Name of a person in contact:</p>
+    <input type="text" ng-model="customerToEdit.name" size="30" placeholder="no name">
+    <p>His/Her surname:</p>
+    <input type="text" ng-model="customerToEdit.surname" size="30" placeholder="no surname">
+    <p>if yes, what is the company name?</p>
+    <input type="text" ng-model="customerToEdit.company.name" size="30" placeholder="no company name">
+    <p>City:</p>
+    <input type="text" ng-model="customerToEdit.city" size="30" placeholder="no city">
+    <p>Postcode:</p>
+    <input type="text" ng-model="customerToEdit.postcode" size="30" placeholder="no postcode">
+    <p>Address:</p>
+    <input type="text" ng-model="customerToEdit.street" size="30" placeholder="no street">
+    <p>Email:</p>
+    <input type="text" ng-model="customerToEdit.email" size="30" placeholder="no email">
+    <p>Phone:</p>
+    <input type="text" ng-model="customerToEdit.phone" size="30" placeholder="no phone">
+
+    <input type="submit" value="add" class="button-add">
+  </form>
+</div>

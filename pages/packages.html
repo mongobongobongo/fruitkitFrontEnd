@@ -1,25 +1,46 @@
 <!-- packages.html -->
-    <div class="">
-        <h2>FruitPacks list Page</h2>
+<div class="">
+  <h2>FruitPacks list Page</h2>
+  <!--<button class="btn"><a href="#packages/{{ pack._id }}">More</a></button> -->
+  <table>
+    <thead>
+      <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Weight</th>
+         <th>Fruits</th>
+         <th>Price</th>
+         <th></th>
+         <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="pack in packs">
+        <td>{{$index + 1}}</td>
+        <td>{{ pack.name }}</td> 
+        <td>{{ pack.weight }}</td>
+        <td>{{ pack.fruits }}</td>
+        <td>{{ pack.price }}</td>
+        <td> 
+          <button class="btn btn-danger" ng-click="removePackage(pack._id, $index)" aria-label="Remove">X</button>
+        </td>
+        <td> 
+          <button class="btn" ng-click="edit(pack)">Edit</button> 
+        </td>    
+      </tr>
+    </tbody>      
+  </table>
 
-        
-        
-
-	     <ul class="list" >
-	     	<li ng-repeat="pack in packs">
-	     		<span>{{$index + 1}}</span>
-	     		<span>{{ pack.name }}</span>
-	     		<span>{{ pack.weight }}</span>
-	     		<span>{{ pack.fruits }}</span>
-	     		
-	     		<button class="btn"><a href="#packages/{{ pack._id }}">More</a></button> 
-	        	<button class="btn btn-danger" ng-click="removePackage(pack._id)" aria-label="Remove">X</button>
-	     	</li>
-	            
-	        
-	           
-	            <!--<button ng-click="customerList.activateEdit()">Edit</button>-->
-	         
-	      </ul>
-    </div>
+  <form ng-show="editing" ng-submit="editPack(packToEdit, packToEdit._id)" class="edit-item">
+    <p>Package name:</p>
+    <input type="text" ng-model="packToEdit.name" size="30" placeholder="no name">
+    <p>Weight:</p>
+    <input type="text" ng-model="packToEdit.weight" size="30" placeholder="no weight">
+    <p>Fruits to include: </p>
+    <input type="text" ng-model="packToEdit.fruits" size="30" placeholder="no fruits">
+    <p>Price in euros:</p>
+    <input type="text" ng-model="packToEdit.price" size="30" placeholder="no price">
+    <input type="submit" value="add" class="button-add">
+  </form>
+</div>
     

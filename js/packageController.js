@@ -1,36 +1,30 @@
 fruitkitControllers.controller('packageController', 
-  ['$scope', '$routeParams' ,'$location', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function($scope, $routeParams, $location, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state) {
-    $scope.packs = [];
+  ['$scope', '$routeParams' ,'$location', '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'cloneObj',
+  function($scope, $routeParams, $location, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state, cloneObj) {
+    $scope.packToEdit = {};
 
-    //old server
-    /*connectToKallesServer.getPackages(function (data) {
-      $scope.packs = data;
-      console.log("real packages", $scope.packs );
-    });*/
-
-    // new server
-    //info from new servers
-    connectToStagingServer.getPackages(function (data) {
-      $scope.packs = data;
-    });
-
-    $scope.packName = "";
-	   $scope.packWeight = "";
-	   $scope.packFruits = "";
-     $scope.price = "";
-    
-    $scope.addPackage = function(){
-    	$scope.pack = {};
-      	$scope.pack.name = $scope.packName || "no name";
-      	$scope.pack.weight = $scope.packWeight  || "no weight";
-      	$scope.pack.fruits = $scope.packFruits || "no fruits";
-       
-      	$scope.packs.push($scope.pack);
-      	connectToKallesServer.postPackages($scope.pack);
-      	$scope.showForm = !$scope.showForm;
+    $scope.edit = function(pack){
+      $scope.packToEdit = cloneObj.clone(pack);
+      $scope.currentPack = pack;
+      $scope.editing = true;
     };
 
+    $scope.editPack = function(changedValue, id){
+      var data = {};
+
+      data.name = changedValue.name || null;
+      data.weight = changedValue.weight || null;
+      data.fruits = changedValue.fruits || null;
+      data.price = changedValue.price|| null;
+
+      connectToStagingServer.putPackage(data, id)
+        .success(function () {
+          Object.assign($scope.currentPack, changedValue);
+          $scope.currentPack = null;
+          $scope.editing = false;
+        });
+    }
+  
     $scope.removePackage = function(id, index){
       console.log("deleted", id);
       connectToStagingServer.deletePackage(id);
