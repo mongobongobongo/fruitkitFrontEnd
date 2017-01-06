@@ -226,7 +226,7 @@ fruitkitDirectives.directive('addCustomer', function() {
                 $scope.customerPhone = "";
              }
 			}
-		} 
+		};
 });
 
 fruitkitDirectives.directive('addFruitpack', function() {
@@ -258,7 +258,7 @@ fruitkitDirectives.directive('addFruitpack', function() {
              $scope.showForm = false;
 			     };
 			}
-		} 
+		}; 
 });
 
 
@@ -267,8 +267,7 @@ fruitkitDirectives.directive('addEmployee', function() {
 			restrict: 'E',
 			templateUrl: '../templates/addEmployee.html',
 			controller: function($scope, $routeParams, $location, $http, connectToStagingServer ){
-					//$scope.employees = [];
-          $scope.showForm = true;
+          		$scope.showForm = true;
 			    $scope.employeeName = "";
 			    $scope.employeeSurname = "";
 			    $scope.employeePhone = "";
@@ -282,5 +281,15 @@ fruitkitDirectives.directive('addEmployee', function() {
 			      $scope.showForm = false;
 			    };
 			}
-		} 
+		}; 
+});
+
+fruitkitDirectives.directive('orderNotifications', function() {
+	return {
+			restrict: 'E',
+			templateUrl: '../templates/addEmployee.html',
+			controller: function($scope, $routeParams, $location, $http, connectToStagingServer, NotifyOrders ){
+         		console.log("hello!");
+			}
+		}; 
 });

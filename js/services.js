@@ -16,7 +16,7 @@ fruitkitServices.service('weekdayToNumber', function(){
 fruitkitServices.service('cloneObj', function(){
   this.clone = function(obj) {
     return JSON.parse(JSON.stringify(obj));
-  }
+  };
 });
 
 //get number of the week
@@ -223,11 +223,9 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
   };
 
   this.putOrder = function(payload, id){
-    $http
-    .put(stagingServer + stagingPort+'/orders/' + id, JSON.stringify(payload))
-    .success(function(data){
-      console.log(data);                        
-        });
+    return  $http
+    .put(stagingServer + stagingPort +'/orders/' + id, JSON.stringify(payload));
+    
   };
 
   this.getOrders = function(callback){
@@ -327,3 +325,21 @@ fruitkitServices.service('connectToStagingServer', ['$http', function($http){
     .put(stagingServer + stagingPort+'/employees/' + id, JSON.stringify(payload));
   };
 }]);
+
+fruitkitServices.factory('CustomerFactory', function($resource) {
+  var stagingServer = 'http://37.139.24.103';
+  var stagingPort = ':3000';
+  return $resource(stagingServer + stagingPort + '/customers/:id'); // Note the full endpoint address
+});
+
+fruitkitServices.service("NotifyOrders", function($http){
+  this.getOrders = function(callback){
+    $http
+    .get(stagingServer + stagingPort+'/orders')
+    .success(function(data){
+      console.log(data);                        
+      callback(data);
+
+        });
+  };
+});

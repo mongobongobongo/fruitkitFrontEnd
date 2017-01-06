@@ -27,11 +27,33 @@
           <td>{{ order.weeks }}</td>
           <td>{{ order.days.toString() }}</td>
           <td>{{ order.orderDriver }}</td>
-          <td><button class="btn"><a href="">Edit</a></button> </td> 
+          
           <td><button class="btn btn-danger" ng-click="removeOrder(order._id, $index)" aria-label="Remove">X</button></td>
+          <td><button class="btn"><a ng-click="edit(order)">Edit</a></button> </td> 
         </tr>
       </tbody>      
     </table>
   </div>
+  <form ng-show="editing" ng-submit="editOrder(orderToEdit, orderToEdit._id)" class="edit-item">
+      <p>What fruitpack do you deliver?</p>
+      <select ng-options="pack.name for pack in packs" ng-model="orderToEdit.pack"></select> 
+    
+      <p>Who is your customer? </p> 
+      <select ng-options="customer.name for customer in customers " ng-model="orderToEdit.customer"></select>
+ 
+      <p>What is the address that you deliver to?</p>
+      <input type="text" ng-model="orderToEdit.address"  size="100" placeholder="delivery address">
+  
+      <p>Delivery details: </p>
+      <input type="text" size="200" ng-model="orderToEdit.details">
+
+      <p>Contact person: </p>
+      <input type="text" size="70" ng-model="orderToEdit.contactPerson"> 
+
+      <p>Contact person tel.: </p>
+      <input type="text" size="20" ng-model="orderToEdit.telephone"> 
+
+      <input class="button-add" type="submit" value="add" >
+  </form>
 </div>
     

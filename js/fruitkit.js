@@ -1,6 +1,6 @@
 'use strict';
 var fruitkit = angular.module('fruitkit', 
-[ 'ngRoute', 'ui.router', 'fruitkitControllers', 'fruitkitServices', 'fruitkitDirectiveSwitcher','fruitkitDirectives' 
+[ 'ngRoute', 'ui.router', 'ngResource', 'fruitkitControllers', 'fruitkitServices', 'fruitkitDirectiveSwitcher','fruitkitDirectives' 
 ]);
 
 

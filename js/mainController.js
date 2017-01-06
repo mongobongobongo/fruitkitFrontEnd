@@ -1,7 +1,7 @@
 fruitkitControllers.controller(
   'mainController', 
-  ['$rootScope', '$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state',
-  function ($rootScope, $scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state ) {
+  ['$rootScope', '$scope', '$routeParams' , '$http', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'CustomerFactory',
+  function ($rootScope, $scope, $routeParams, $http, connectToStagingServer, AuthService, API_ENDPOINT, $state, CustomerFactory) {
 
     //scope variables
     //$scope.orders = [];

@@ -1,6 +1,6 @@
 fruitkitControllers.controller('customersController', 
-  ['$scope', '$location', '$http', '$rootScope', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'cloneObj',
-  function($scope, $location, $http, $rootScope, connectToStagingServer, AuthService, API_ENDPOINT, $state, cloneObj)  {
+  ['$scope', '$location', '$http', '$rootScope', 'connectToStagingServer', 'AuthService', 'API_ENDPOINT', '$state', 'cloneObj', 'CustomerFactory',
+  function($scope, $location, $http, $rootScope, connectToStagingServer, AuthService, API_ENDPOINT, $state, cloneObj, CustomerFactory)  {
 
     $scope.customerToEdit = {};
 
@@ -35,7 +35,7 @@ fruitkitControllers.controller('customersController',
           $scope.currentCustomer = null;
           $scope.editing = false;
         });
-    }
+    };
 
      $scope.toggle = function(){
         $scope.showForm = !$scope.showForm;

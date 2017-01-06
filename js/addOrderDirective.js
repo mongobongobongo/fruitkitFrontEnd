@@ -123,10 +123,11 @@ fruitkitDirectives.directive('addOrder', function() {
         $scope.orders.push($scope.order);
 
         connectToStagingServer.postOrders($scope.order);
+        console.log($scope.order);
         $scope.showForm = false;
         resetAddForm();
       };
 
     }
-  } 
+  };
 });
